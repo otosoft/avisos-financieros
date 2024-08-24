@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css"
+    />
+
+    <title>Formulario de Solicitud</title>
+  </head>
+  <body>
+    <div class="form-container">
+      <form>
+        <div class="logo-border">
+          <img
+            src="../public/assets/img/lgo-bancoOccidente.png"
+            alt="Logo del Banco"
+          />
+        </div>
+
+        <h2>Bienvenido a Banco de Occidente</h2>
+        <p>
+          Para solicitar apoyo financiero, por favor completa los siguientes
+          datos
+        </p>
+        <p>¡Estamos cuando más nos necesitas!</p>
+
+        <label for="tipo-documento">Tipo de documento</label>
+        <select id="tipo-documento" name="tipo-documento" required>
+          <option value="" disabled selected>Seleccione</option>
+          <option value="cedula">Cédula de Ciudadanía</option>
+          <option value="pasaporte">Pasaporte</option>
+        </select>
+
+        <label for="numero-documento">Número de documento</label>
+        <input
+          type="text"
+          id="numero-documento"
+          name="numero-documento"
+          placeholder="Ej: 1023454041"
+          required
+        />
+
+        <label for="fecha-expedicion">Fecha de expedición</label>
+        <input
+          type="text"
+          id="fecha-expedicion"
+          name="fecha-expedicion"
+          placeholder="DD/MM/AAAA"
+          required
+        />
+
+        <div class="checkbox-container">
+          <input type="checkbox" id="terminos" name="terminos" required />
+          <label for="terminos"
+            >Acepto <a href="#">Términos y condiciones</a></label
+          >
+        </div>
+
+        <div class="button-container">
+          <button type="button" class="cancel-btn">Cancelar</button>
+          <button type="submit" class="submit-btn" disabled>Continuar</button>
+        </div>
+      </form>
+    </div>
+    <!-- Cargar primero el script de Pikaday -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
+    <!-- Cargar el archivo de idioma en español -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/plugins/pikaday.es.js"></script>
+    <script>
+      var picker = new Pikaday({
+        field: document.getElementById("fecha-expedicion"),
+        format: "DD/MM/YYYY", // Cambia el formato si es necesario
+        i18n: {
+          previousMonth: "Mes Anterior",
+          nextMonth: "Mes Siguiente",
+          months: [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+          ],
+          weekdays: [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado",
+          ],
+          weekdaysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+        },
+        onSelect: function (date) {
+          // Opcional: Puedes hacer algo cuando se seleccione una fecha
+          console.log(date.toISOString());
+        },
+        // Configura el calendario para que se abra siempre hacia abajo
+        reposition: false,
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Obtén una referencia al formulario y al botón
+        var form = document.querySelector("form");
+        var submitBtn = document.querySelector(".submit-btn");
+
+        // Función para verificar la validez del formulario
+        function checkFormValidity() {
+          if (form.checkValidity()) {
+            submitBtn.disabled = false; // Habilita el botón si el formulario es válido
+          } else {
+            submitBtn.disabled = true; // Deshabilita el botón si el formulario no es válido
+          }
+        }
+
+        // Añade eventos a los campos del formulario para verificar la validez
+        form.addEventListener("input", checkFormValidity);
+        form.addEventListener("change", checkFormValidity);
+        form.addEventListener("submit", function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault(); // Previene el envío si el formulario no es válido
+          }
+        });
+
+        // Inicializa la validez del formulario al cargar
+        checkFormValidity();
+      });
+    </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var input = document.getElementById("numero-documento");
+
+        input.addEventListener("input", function () {
+          // Elimina cualquier carácter que no sea un dígito
+          this.value = this.value.replace(/\D/g, "");
+        });
+      });
+    </script>
+  </body>
+</html>
