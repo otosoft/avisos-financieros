@@ -1,5 +1,11 @@
+@font-face {
+  font-family: "Gellion";
+  src: url("../fonts/Gelion.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Gellion", sans-serif;
   background-color: #f1f3fa;
   display: flex;
   justify-content: center;
@@ -29,7 +35,7 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: min-content;
   margin: 0 auto;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .logo-border img {
@@ -47,7 +53,9 @@ p {
   text-align: center;
   margin-bottom: 20px;
   color: #666;
-  font-size: 0.8em;
+  font-size: 0.9em;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 label {
