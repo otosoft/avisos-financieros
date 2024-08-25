@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cambio de Fecha</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../resumen-producto/assets/css/style.css" />
+  </head>
+  <body class="bg-light">
+    <div class="container mt-5 container-principal">
+      <div class="card shadow-sm p-2 rounded card-shadow">
+        <div class="box-gray">
+          <div class="mb-3">
+            <a
+              href="../seleccion-producto/seleccion-producto.html"
+              class="text-decoration-none text-primary"
+              >← Atrás</a
+            >
+          </div>
+          <h6 class="text-muted">
+            CAMBIO DE FECHA - Tu fecha de corte actual es: 05/27
+          </h6>
+          <p>Si quieres cambiarla, selecciona una nueva aquí</p>
+        </div>
+
+        <div class="card border-0 mb-3 p-3">
+          <div class="row align-items-center box-border-custom">
+            <div class="col-3 col-sm-2 col-md-1 text-center">
+              <img
+                src="../resumen-producto/assets/img/payment.png"
+                alt="Icono"
+                class="img-fluid img-fluid-custom"
+              />
+            </div>
+            <div class="col-9 col-sm-10 col-md-8 text-center-custom">
+              <h5 class="mb-1">Libranza</h5>
+              <p class="text-muted mb-0 color-morado">****-****-4567</p>
+            </div>
+            <div class="col-12 col-md-3 text-end mt-3 mt-md-0">
+              <h5 class="text-primary mb-0 text-primary-custom">Deuda total</h5>
+              <h3 class="text-primary price-primary-custom">$ 9.873.983</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row align-items-center ms-4 me-4">
+          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+            <p class="mb-0 text-final-custom"></p>
+          </div>
+          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+            <p class="mb-0 text-final-custom">Saldo vigente (capital)</p>
+          </div>
+          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+            <p class="mb-0 text-final-custom">Tasa MV</p>
+          </div>
+          <div class="col-12 col-sm-3 text-center text-sm-end mb-3 mb-sm-0">
+            <p class="mb-0 text-final-custom">Modificar fecha de corte</p>
+          </div>
+        </div>
+
+        <hr class="single-divider ms-4 me-4" />
+
+        <div class="row align-items-center mb-2 ms-4 me-4 row-custom">
+          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+            <input type="checkbox" class="form-check-input" checked />
+          </div>
+          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+            <h4 class="text-result-custom">$ 9.873.983</h4>
+          </div>
+          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+            <h4 class="text-result-custom">12 %</h4>
+          </div>
+          <div class="col-12 col-sm-3 text-center text-sm-end">
+            <select class="form-select select-auto-width">
+              <option selected>02</option>
+              <!-- Add other options as needed -->
+            </select>
+          </div>
+        </div>
+
+        <hr class="single-divider ms-4 me-4" />
+
+        <div class="d-flex justify-content-between justify-content-sm-end mt-4">
+          <button class="btn btn-light me-2" id="continuarBtn">Cancelar</button>
+          <button class="btn btn-primary">Continuar →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de confirmación -->
+    <div
+      class="modal fade"
+      id="confirmModal"
+      tabindex="-1"
+      aria-labelledby="confirmModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="triangle-container">
+              <img
+                src="../resumen-producto/assets/img/advertencia.png"
+                alt="Advertencia"
+              />
+            </div>
+            <h5>¿SEGURO DESEAS SALIR?</h5>
+            <p>
+              Estás a punto de abandonar el proceso de consolidación de tu
+              deuda.
+            </p>
+          </div>
+          <hr />
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" id="confirmBtn">
+              Salir
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              Continuar proceso
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document
+        .getElementById("continuarBtn")
+        .addEventListener("click", function () {
+          var confirmModal = new bootstrap.Modal(
+            document.getElementById("confirmModal")
+          );
+          confirmModal.show();
+        });
+
+      document
+        .getElementById("confirmBtn")
+        .addEventListener("click", function () {
+          // Aquí puedes agregar la lógica que debe ejecutarse cuando se confirme la acción
+          window.location.href =
+            "../seleccion-producto/seleccion-producto.html";
+        });
+    </script>
+  </body>
+</html>
