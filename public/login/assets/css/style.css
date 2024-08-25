@@ -1,9 +1,3 @@
-@font-face {
-  font-family: "Gellion";
-  src: url("../fonts/Gelion.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
 body {
   font-family: "Gellion", sans-serif;
   background-color: #f1f3fa;
@@ -185,4 +179,45 @@ input::placeholder {
 .pika-button:hover,
 .pika-button.pika-selected {
   color: #0056b3 !important;
+}
+
+@media (max-width: 400px) {
+  h2 {
+    font-size: 1.1em;
+  }
+
+  p {
+    font-size: 0.8em;
+    padding-left: 20px;
+    padding-bottom: 0;
+  }
+
+  label {
+    font-size: 0.7em;
+  }
+
+  input[type="text"],
+  select {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 300px) {
+  h2 {
+    font-size: 1em;
+  }
+
+  p {
+    font-size: 0.7em;
+    padding-left: 10px;
+  }
+
+  label {
+    font-size: 0.6em;
+  }
+
+  input[type="text"],
+  select {
+    padding: 8px;
+  }
 }

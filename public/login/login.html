@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../public/assets/css/style.css" />
+    <link rel="stylesheet" href="../login/assets/css/style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/css/pikaday.min.css"
@@ -17,7 +17,7 @@
       <form>
         <div class="logo-border">
           <img
-            src="../public/assets/img/lgo-bancoOccidente.png"
+            src="../login/assets/img/lgo-bancoOccidente.png"
             alt="Logo del Banco"
           />
         </div>
@@ -63,7 +63,9 @@
 
         <div class="button-container">
           <button type="button" class="cancel-btn">Cancelar</button>
-          <button type="submit" class="submit-btn" disabled>Continuar</button>
+          <button type="button" class="submit-btn" id="continue-btn">
+            Continuar
+          </button>
         </div>
       </form>
     </div>
@@ -148,6 +150,13 @@
           this.value = this.value.replace(/\D/g, "");
         });
       });
+
+      document
+        .getElementById("continue-btn")
+        .addEventListener("click", function () {
+          window.location.href =
+            "../seleccion-producto/seleccion-producto.html";
+        });
     </script>
   </body>
 </html>
