@@ -1,0 +1,130 @@
+body {
+    background-color: #f8f9fa;
+    font-family: "Gellion", sans-serif;
+}
+
+.card {
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    max-width: 800px; /* Set the max-width to 800px */
+    width: 100%; /* Ensure it is responsive on smaller screens */
+    margin: auto; /* Center the card horizontally */
+}
+
+.box-gray {
+    background-color: #f3f3f3;
+    padding-left: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 8px;
+  }
+
+input.form-control {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    width: 50px !important;
+    height: 50px !important;
+}
+
+a.text-primary {
+    color: #007bff;
+}
+
+a.text-primary:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+a.text-decoration-none {
+    text-decoration: none;
+}
+
+button.btn-primary {
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #4da6ff, #0056b3);
+}
+
+button.btn-light {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+}
+
+.container-txt{
+    padding-inline: 22%;
+}
+
+.text-cseguridad{
+    margin: 0;
+    color: #888;
+    padding-top: 15px;
+}
+
+.text-black{
+    color: black;
+}
+
+h4{
+    font-size: 18px;
+    margin-top: 30px;
+}
+
+hr{
+    color: #888;
+    margin: 0 !important;
+}
+
+p{
+    font-size: 15px;
+}
+
+.code-input {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    border: 0.5px solid #0056b3 !important;
+    text-align: center;
+    font-size: 2rem;
+    position: relative;
+    color: #888;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.code-input::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 1px;
+    background-color: #888;
+    transform: translate(-50%, -50%);
+}
+
+.code-input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.code-input:focus::before {
+    background-color: #007bff;
+}
+
+.morado{
+    color: #78288C;
+    text-decoration: none;
+}
+
+@media (max-width: 576px) {
+    .card {
+        padding: 1.5rem;
+    }
+
+    input.form-control {
+        width: 18%;
+        font-size: 1.5rem;
+    }
+
+    button {
+        font-size: 0.875rem;
+    }
+}
