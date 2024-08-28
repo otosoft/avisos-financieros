@@ -1,7 +1,17 @@
+html, body {
+  height: 100%;
+  margin: 0; 
+}
+
 body {
+  display: flex;
   font-family: "Gellion", sans-serif;
   background-color: #f8f9fa;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
 }
+
 
 .card {
   border-radius: 15px;
