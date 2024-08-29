@@ -11,8 +11,162 @@
     />
 
     <title>Formulario de Solicitud</title>
+    <style>
+      .header {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white; /* Fondo blanco para la sección del logo */
+      }
+
+      .header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+      }
+
+      .header .logo-section {
+        position: relative;
+        background-color: white; /* Fondo blanco */
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        z-index: 1;
+      }
+
+      .header .logo-section::after {
+        content: "";
+        position: absolute;
+        left: 200px; /* Ajusta este valor para controlar el ángulo */
+        top: -9px;
+        width: 0;
+        height: 0;
+        border-top: 85px solid white; /* Ajusta la altura */
+        border-right: 100px solid #4a90e2; /* Color y tamaño del triángulo azul */
+        z-index: 1;
+      }
+
+      .header .logo-section img {
+        height: 50px;
+        z-index: 2; /* Asegura que el logo esté por encima del triángulo */
+      }
+
+      .header .nav-section {
+        background: linear-gradient(90deg, #4a90e2 0%, #1c3d75 60%);
+        padding: 20px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        flex-grow: 1;
+        margin-left: 80px;
+      }
+
+      .navigation {
+        display: flex;
+        align-items: center;
+        margin-right: auto;
+      }
+
+      .navigation a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+      }
+
+      .navigation span {
+        color: white;
+      }
+
+      .buttons {
+        display: flex;
+        align-items: center;
+      }
+
+      .btn-outline,
+      .btn-solid {
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 10px;
+      }
+
+      .btn-outline {
+        color: white;
+        border: 2px solid white;
+        background-color: transparent;
+      }
+
+      .btn-solid {
+        color: white;
+        background: linear-gradient(to bottom, #4da6ff, #0056b3);
+        border: 2px solid #4a90e2;
+      }
+
+      .footer {
+        width: 100%;
+        background-color: transparent; /* Fondo transparente */
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: auto;
+      }
+
+      .footer-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-logo {
+        height: 50px; /* Ajusta la altura del logo */
+        margin: 0 20px; /* Espacio entre los logos y el separador */
+      }
+
+      .separator {
+        width: 1px;
+        height: 50px; /* Igual a la altura de los logos */
+        background-color: rgba(
+          0,
+          0,
+          0,
+          0.1
+        ); /* Color gris claro para el separador */
+      }
+    </style>
   </head>
   <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="logo-section">
+          <img
+            src="../login/assets/img/logo-bancoOccidente.png"
+            alt="Banco de Occidente"
+          />
+        </div>
+        <div class="nav-section">
+          <nav class="navigation">
+            <a href="#">Personas</a>
+            <span>|</span>
+            <a href="#">Empresas</a>
+          </nav>
+          <div class="buttons">
+            <a href="#" class="btn-outline">Simula y Solicita</a>
+            <a href="#" class="btn-solid">Transacciones</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
     <div class="form-container">
       <form>
         <div class="logo-border">
@@ -69,6 +223,17 @@
         </div>
       </form>
     </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <img
+          src="ruta-al-logo1.png"
+          alt="Banco de Occidente"
+          class="footer-logo"
+        />
+        <div class="separator"></div>
+        <img src="ruta-al-logo2.png" alt="Grupo Aval" class="footer-logo" />
+      </div>
+    </footer>
     <!-- Cargar primero el script de Pikaday -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.8.0/pikaday.min.js"></script>
     <!-- Cargar el archivo de idioma en español -->
