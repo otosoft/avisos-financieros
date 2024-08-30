@@ -5,6 +5,7 @@ body, html {
     justify-content: center;
     align-items: center;
     font-family: "Gellion", sans-serif;
+    flex-direction: column;
 }
 
 .main-container {
@@ -14,6 +15,7 @@ body, html {
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+    position: fixed;
 }
 
 .back-link {
@@ -50,8 +52,8 @@ body, html {
 }
 
 .icon {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
 }
 
 .card-title {

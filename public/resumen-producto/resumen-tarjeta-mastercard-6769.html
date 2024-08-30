@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Libranza</title>
+    <title>Tarjeta Mastercard</title>
     <style>
       .header {
         width: 100%;
@@ -148,6 +148,7 @@
     <link rel="stylesheet" href="../resumen-producto/assets/css/style.css" />
   </head>
   <body class="bg-light">
+
     <!-- Header -->
     <header class="header">
       <div class="container">
@@ -182,62 +183,72 @@
             >
           </div>
           <h6 class="text-muted">
-            CAMBIO DE FECHA - Tu fecha de corte actual es: 05/27
+            Te ofrecemos consolidar el saldo de tus tarjetas de crédito con una tasa reducida
           </h6>
-          <p>Si quieres cambiarla, selecciona una nueva aquí</p>
+          <p>Aprovécha ¡es por tiempo limitado!</p>
         </div>
 
         <div class="card border-0 mb-3 p-3">
           <div class="row align-items-center box-border-custom">
             <div class="col-3 col-sm-2 col-md-1 text-center">
               <img
-                src="../resumen-producto/assets/img/payment.png"
+                src="../resumen-producto/assets/img/icono_de_tarjetas.png"
                 alt="Icono"
                 class="img-fluid img-fluid-custom"
               />
             </div>
             <div class="col-9 col-sm-10 col-md-8 text-center-custom">
-              <h5 class="mb-1">Libranza</h5>
-              <p class="text-muted mb-0 color-morado">****-****-4567</p>
+              <h5 class="mb-1">Tarjeta de crédito Mastercard</h5>
+              <p class="text-muted mb-0 color-morado">....-....-6769</p>
             </div>
             <div class="col-12 col-md-3 text-end mt-3 mt-md-0">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input form-check-input-custom" />
+                <label class="form-check-label" for="option1">
+                  Quiero consolidar
+                </label>
+              </div>
+              
               <h5 class="text-primary mb-0 text-primary-custom">Deuda total</h5>
-              <h3 class="text-primary price-primary-custom">$ 9.873.983</h3>
+              <h3 class="text-primary price-primary-custom">$ 160.000</h3>
             </div>
           </div>
         </div>
         <div class="row align-items-center ms-4 me-4">
-          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+          <div class="col-12 col-sm-2 text-center text-sm-start mb-3 mb-sm-0">
             <p class="mb-0 text-final-custom"></p>
           </div>
           <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
             <p class="mb-0 text-final-custom">Saldo vigente (capital)</p>
           </div>
-          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
+          <div class="col-12 col-sm-2 text-center text-sm-start mb-3 mb-sm-0">
             <p class="mb-0 text-final-custom">Tasa MV</p>
           </div>
+          <div class="col-12 col-sm-2 text-center text-sm-start mb-3 mb-sm-0">
+            <p class="mb-0 text-final-custom">Tus saldos se consolidan en</p>
+          </div>
           <div class="col-12 col-sm-3 text-center text-sm-end mb-3 mb-sm-0">
-            <p class="mb-0 text-final-custom">Modificar fecha de corte</p>
+            <p class="mb-0 text-final-custom">Plazo</p>
           </div>
         </div>
 
         <hr class="single-divider ms-4 me-4" />
 
         <div class="row align-items-center mb-2 ms-4 me-4 row-custom">
-          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
-            <input type="checkbox" class="form-check-input" checked />
+          <div class="col-12 col-sm-2 text-center text-sm-start mb-3 mb-sm-0">
+            <input type="checkbox" class="form-check-input" />
           </div>
           <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
-            <h4 class="text-result-custom">$ 9.873.983</h4>
+            <h4 class="text-result-custom">$ 296.000</h4>
           </div>
-          <div class="col-12 col-sm-3 text-center text-sm-start mb-3 mb-sm-0">
-            <h4 class="text-result-custom">12 %</h4>
+          <div class="col-12 col-sm-2 text-center text-sm-start mb-3 mb-sm-0">
+            <h4 class="text-result-custom">8 %</h4>
+          </div>
+          <div class="col-12 col-sm-2 text-center text-sm-start mb-3 mb-sm-0">
+            <h4 class="text-result-custom">Tarjeta Mastercard</h4>
           </div>
           <div class="col-12 col-sm-3 text-center text-sm-end">
-            <select class="form-select select-auto-width">
-              <option selected>02</option>
-              <!-- Add other options as needed -->
-            </select>
+            <h4 class="text-result-custom">60 meses</h4>
           </div>
         </div>
 
@@ -245,12 +256,7 @@
 
         <div class="d-flex justify-content-between justify-content-sm-end mt-4">
           <button class="btn btn-light me-2" id="continuarBtn">Cancelar</button>
-          <button
-            class="btn btn-primary"
-            onclick="window.location.href='../cambio-fecha/cambio-fecha.html'"
-          >
-            Continuar →
-          </button>
+          <button class="btn btn-primary" onclick="window.location.href='../cambio-fecha/cambio-fecha-mastercard.html'">Continuar →</button>
         </div>
       </div>
     </div>
@@ -270,6 +276,7 @@
         />
       </div>
     </footer>
+
 
     <!-- Modal de confirmación -->
     <div

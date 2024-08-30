@@ -1,22 +1,38 @@
 body {
   font-family: "Gellion", sans-serif;
   background-color: #f5f7fc;
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  margin: 0;
 }
+
+.container-principal {
+  flex: 1; /* Hace que el contenedor ocupe el espacio disponible */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra verticalmente */
+  align-items: center; /* Centra horizontalmente */
+}
+
 .card-custom {
   max-width: 800px;
-  width: 800px;
+  width: 100%;
   margin: 15px;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: left !important;
 }
+
+.card-footer-custom {
+  padding: 0;
+  border-top: 0;
+  background-color: transparent;
+  margin-top: 15px; /* Añadir espacio entre el contenido y el pie de página */
+  position: relative; /* Asegura que se mantenga en el flujo del documento */
+}
+
 
 .product-grid,
 .pagination-message {
@@ -94,6 +110,7 @@ body {
   padding: 0;
   border-top: 0;
   background-color: transparent;
+  position: relative;
 }
 
 .text-p-Deuda-rigth {

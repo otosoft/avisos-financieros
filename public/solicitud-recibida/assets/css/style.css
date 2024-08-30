@@ -6,6 +6,7 @@ body {
     align-items: center;
     min-height: 100vh;
     font-family: "Gellion", sans-serif;
+    flex-direction: column;
 }
 
 .container-main {
@@ -15,10 +16,15 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    width: 100%;
+    position: fixed; /* Posiciona la tarjeta de forma fija */
+    top: 50%; /* Coloca la tarjeta al 50% del alto de la pantalla */
+    left: 50%; /* Coloca la tarjeta al 50% del ancho de la pantalla */
+    transform: translate(-50%, -50%); /* Centra la tarjeta restando la mitad de su ancho y alto */
 }
 
 .icon {
-    width: 60px;
+    width: 80px;
     padding-top: 20px;
     padding-bottom: 20px;
     margin: 0 auto;

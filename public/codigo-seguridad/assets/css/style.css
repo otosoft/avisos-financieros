@@ -1,15 +1,22 @@
 body {
     background-color: #f8f9fa;
     font-family: "Gellion", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
 }
 
 .card {
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-    max-width: 800px; /* Set the max-width to 800px */
-    width: 100%; /* Ensure it is responsive on smaller screens */
-    margin: auto; /* Center the card horizontally */
+    max-width: 800px;
+    width: 100%;
+    position: fixed; /* Posiciona la tarjeta de forma fija */
+    top: 50%; /* Coloca la tarjeta al 50% del alto de la pantalla */
+    left: 50%; /* Coloca la tarjeta al 50% del ancho de la pantalla */
+    transform: translate(-50%, -50%); /* Centra la tarjeta restando la mitad de su ancho y alto */
 }
+
 
 .box-gray {
     background-color: #f3f3f3;
@@ -50,7 +57,7 @@ button.btn-light {
 }
 
 .container-txt{
-    padding-inline: 22%;
+    padding-inline: 30%;
 }
 
 .text-cseguridad{
@@ -112,6 +119,10 @@ p{
 .morado{
     color: #78288C;
     text-decoration: none;
+}
+
+.text-muted{
+    padding-inline: 15%;
 }
 
 @media (max-width: 576px) {
