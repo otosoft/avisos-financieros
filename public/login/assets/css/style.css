@@ -1,11 +1,30 @@
+html,
 body {
+  height: 100%;
+  margin: 0;
   font-family: "Gellion", sans-serif;
   background-color: #f1f3fa;
+  overflow-x: hidden; /* Evitar scroll horizontal no deseado */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  width: 100%;
+  background-color: white;
+  padding: 20px 0;
+}
+
+.main-content {
+  flex-grow: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  width: 100%;
+  padding: 40px 0; /* Añade margen para que no toque los bordes */
 }
 
 .form-container {
@@ -16,7 +35,16 @@ body {
   max-width: 400px;
   width: 100%;
   text-align: center;
-  position: fixed;
+  overflow-y: auto; /* Scroll dentro del formulario si el contenido es muy grande */
+}
+
+.footer {
+  width: 100%;
+  background-color: transparent;
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo-border {
@@ -153,72 +181,85 @@ input::placeholder {
   background-color: #e0e0e0;
 }
 
-/* Cambiar el color de fondo del día seleccionado */
-.pika-button.pika-selected {
-  background-color: #0056b3 !important;
-  color: #ffffff !important; /* Asegúrate de que el texto sea legible */
+@media (min-width: 1400px) {
+  .form-container {
+    max-width: 500px;
+    padding: 40px;
+  }
+
+  h2 {
+    font-size: 1.4em;
+  }
+
+  p {
+    font-size: 1em;
+  }
+
+  label {
+    font-size: 0.9em;
+  }
+
+  input[type="text"],
+  select {
+    font-size: 1em;
+    padding: 12px;
+  }
 }
 
-/* Cambiar el color del borde del día seleccionado */
-.pika-button.pika-selected,
-.pika-button.pika-selected:hover {
-  border-color: #0056b3 !important;
+@media (min-width: 768px) and (max-width: 1399px) {
+  .form-container {
+    max-width: 450px;
+    padding: 35px;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  p {
+    font-size: 0.95em;
+  }
+
+  input[type="text"],
+  select {
+    padding: 12px;
+    font-size: 0.95em;
+  }
 }
 
-/* Cambiar el color de fondo del día en hover */
-.pika-button:hover {
-  background-color: rgba(
-    0,
-    86,
-    179,
-    0.2
-  ) !important; /* Azul tenue, casi transparente */
-  border-color: #0056b3 !important; /* Opcional: Color del borde en hover */
-}
+@media (max-width: 767px) {
+  .form-container {
+    max-width: 100%;
+    padding: 20px;
+  }
 
-/* Asegúrate de que el texto del día en hover sea legible */
-.pika-button:hover,
-.pika-button.pika-selected {
-  color: #0056b3 !important;
-}
-
-@media (max-width: 400px) {
   h2 {
     font-size: 1.1em;
   }
 
   p {
-    font-size: 0.8em;
+    font-size: 0.85em;
     padding-left: 20px;
-    padding-bottom: 0;
+    padding-right: 20px;
   }
 
   label {
-    font-size: 0.7em;
+    font-size: 0.75em;
   }
 
   input[type="text"],
   select {
-    padding: 8px;
-  }
-}
-
-@media (max-width: 300px) {
-  h2 {
-    font-size: 1em;
+    padding: 10px;
+    font-size: 0.85em;
   }
 
-  p {
-    font-size: 0.7em;
-    padding-left: 10px;
+  .checkbox-container {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  label {
-    font-size: 0.6em;
-  }
-
-  input[type="text"],
-  select {
-    padding: 8px;
+  .button-container {
+    flex-direction: column;
+    gap: 15px;
   }
 }

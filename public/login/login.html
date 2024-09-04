@@ -14,14 +14,13 @@
     <style>
       .header {
         width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
+        background-color: white;
         z-index: 1000;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background-color: white; /* Fondo blanco para la sección del logo */
+        padding: 0px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
       .header .container {
@@ -29,44 +28,43 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
+        padding: 0 0px;
       }
 
       .header .logo-section {
-        position: relative;
-        background-color: white; /* Fondo blanco */
-        padding: 10px 20px;
         display: flex;
         align-items: center;
-        z-index: 1;
-      }
-
-      .header .logo-section::after {
-        content: "";
-        position: absolute;
-        left: 270px; /* Ajusta este valor para controlar el ángulo */
-        top: -9px;
-        width: 0;
-        height: 0;
-        border-top: 85px solid white; /* Ajusta la altura */
-        border-right: 100px solid #4a90e2; /* Color y tamaño del triángulo azul */
-        z-index: 1;
+        position: relative;
       }
 
       .header .logo-section img {
         height: 50px;
-        z-index: 2; /* Asegura que el logo esté por encima del triángulo */
-        padding-left: 40px;
+        padding-left: 20px;
       }
 
       .header .nav-section {
-        background: linear-gradient(90deg, #4a90e2 0%, #1c3d75 60%);
-        padding: 20px 20px;
+        background: linear-gradient(90deg, #4a90e2 0px, #1c3d75 700px);
+        padding: 20.5px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        position: relative;
         flex-grow: 1;
-        margin-left: 80px;
+        border-radius: 5px;
+        position: relative;
+        z-index: 1111;
+        padding-left: 100px;
+      }
+
+      /* Triángulo diagonal para el header */
+      .header .logo-section::after {
+        content: "";
+        position: absolute;
+        left: 200px; /* Ajusta este valor para controlar el ángulo */
+        width: 0;
+        height: 0;
+        border-top: 85px solid white; /* Ajusta la altura */
+        border-right: 100px solid #4788d6; /* Color y tamaño del triángulo azul */
+        z-index: 1111111;
       }
 
       .navigation {
@@ -80,10 +78,6 @@
         text-decoration: none;
         margin: 0 15px;
         font-weight: bold;
-      }
-
-      .navigation span {
-        color: white;
       }
 
       .buttons {
@@ -112,14 +106,45 @@
         border: 2px solid #4a90e2;
       }
 
+      /* Botón hamburguesa oculto por defecto */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 25px;
+        height: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .hamburger div {
+        width: 100%;
+        height: 3px;
+        background-color: #333;
+        transition: all 0.3s ease;
+      }
+
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      /* Footer */
       .footer {
         width: 100%;
-        background-color: transparent; /* Fondo transparente */
+        background-color: transparent;
         padding: 20px 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: auto;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
       }
 
       .footer-container {
@@ -128,19 +153,117 @@
       }
 
       .footer-logo {
-        height: 50px; /* Ajusta la altura del logo */
-        margin: 0 20px; /* Espacio entre los logos y el separador */
+        height: 50px;
+        margin: 0 20px;
       }
 
       .separator {
         width: 1px;
-        height: 50px; /* Igual a la altura de los logos */
-        background-color: rgba(
-          0,
-          0,
-          0,
-          0.1
-        ); /* Color gris claro para el separador */
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      /* Estilos para pantallas pequeñas (hamburguesa) */
+      @media (max-width: 960px) {
+        .header .container {
+          padding: 20px;
+        }
+
+        .header .nav-section {
+          display: none;
+          position: fixed; /* Cambiado de absolute a fixed para que el menú cubra toda la pantalla */
+          top: 70px;
+          left: 0;
+          width: 100%;
+          flex-direction: column;
+          background: #4a90e2;
+          justify-content: flex-start; /* Centrar los elementos verticalmente */
+          align-items: center;
+          padding-top: 20px;
+          z-index: 1000;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+          padding: 0 !important;
+          padding-bottom: 20px !important;
+        }
+
+        .header .logo-section::after {
+          display: none;
+        }
+
+        .header .nav-section.active {
+          display: flex;
+        }
+
+        .navigation {
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        .navigation a {
+          padding: 15px 0;
+          margin: 0;
+          width: 80%;
+          text-align: center;
+          color: white;
+          font-size: 1.2em;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Separador entre los enlaces */
+          transition: background-color 0.3s ease;
+        }
+
+        .navigation a:hover {
+          background-color: rgba(
+            255,
+            255,
+            255,
+            0.1
+          ); /* Fondo al pasar el mouse o tocar */
+        }
+
+        .buttons {
+          display: flex;
+          flex-direction: column;
+          width: 80%; /* Ocupa el 80% del ancho para mayor accesibilidad */
+          margin-top: 20px;
+          gap: 15px; /* Espaciado entre botones */
+        }
+
+        .buttons a {
+          width: 100%;
+          text-align: center;
+          padding: 15px;
+          background-color: white;
+          color: #0056b3;
+          border: 2px solid #0056b3;
+          border-radius: 5px;
+          font-weight: bold;
+          transition: all 0.3s ease;
+        }
+
+        .buttons a:hover {
+          background-color: #0056b3;
+          color: white;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+
+        .footer-container {
+          flex-direction: column;
+        }
+
+        .footer-logo {
+          margin: 10px 0;
+        }
+
+        .separator {
+          display: none;
+        }
       }
     </style>
   </head>
@@ -154,7 +277,12 @@
             alt="Banco de Occidente"
           />
         </div>
-        <div class="nav-section">
+        <div class="hamburger" id="hamburger">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="nav-section" id="nav-section">
           <nav class="navigation">
             <a href="#">Personas</a>
             <span>|</span>
@@ -168,61 +296,63 @@
       </div>
     </header>
 
-    <div class="form-container">
-      <form>
-        <div class="logo-border">
-          <img
-            src="../login/assets/img/lgo-bancoOccidente.png"
-            alt="Logo del Banco"
+    <div class="main-content">
+      <div class="form-container">
+        <form>
+          <div class="logo-border">
+            <img
+              src="../login/assets/img/lgo-bancoOccidente.png"
+              alt="Logo del Banco"
+            />
+          </div>
+
+          <h2>Bienvenido a Banco de Occidente</h2>
+          <p>
+            Para solicitar apoyo financiero, por favor completa los siguientes
+            datos
+          </p>
+          <p>¡Estamos cuando más nos necesitas!</p>
+
+          <label for="tipo-documento">Tipo de documento</label>
+          <select id="tipo-documento" name="tipo-documento" required>
+            <option value="" disabled selected>Seleccione</option>
+            <option value="cedula">Cédula de Ciudadanía</option>
+            <option value="pasaporte">Pasaporte</option>
+          </select>
+
+          <label for="numero-documento">Número de documento</label>
+          <input
+            type="text"
+            id="numero-documento"
+            name="numero-documento"
+            placeholder="Ej: 1023454041"
+            required
           />
-        </div>
 
-        <h2>Bienvenido a Banco de Occidente</h2>
-        <p>
-          Para solicitar apoyo financiero, por favor completa los siguientes
-          datos
-        </p>
-        <p>¡Estamos cuando más nos necesitas!</p>
+          <label for="fecha-expedicion">Fecha de expedición</label>
+          <input
+            type="text"
+            id="fecha-expedicion"
+            name="fecha-expedicion"
+            placeholder="DD/MM/AAAA"
+            required
+          />
 
-        <label for="tipo-documento">Tipo de documento</label>
-        <select id="tipo-documento" name="tipo-documento" required>
-          <option value="" disabled selected>Seleccione</option>
-          <option value="cedula">Cédula de Ciudadanía</option>
-          <option value="pasaporte">Pasaporte</option>
-        </select>
+          <div class="checkbox-container">
+            <input type="checkbox" id="terminos" name="terminos" required />
+            <label for="terminos"
+              >Acepto <a href="#">Términos y condiciones</a></label
+            >
+          </div>
 
-        <label for="numero-documento">Número de documento</label>
-        <input
-          type="text"
-          id="numero-documento"
-          name="numero-documento"
-          placeholder="Ej: 1023454041"
-          required
-        />
-
-        <label for="fecha-expedicion">Fecha de expedición</label>
-        <input
-          type="text"
-          id="fecha-expedicion"
-          name="fecha-expedicion"
-          placeholder="DD/MM/AAAA"
-          required
-        />
-
-        <div class="checkbox-container">
-          <input type="checkbox" id="terminos" name="terminos" required />
-          <label for="terminos"
-            >Acepto <a href="#">Términos y condiciones</a></label
-          >
-        </div>
-
-        <div class="button-container">
-          <button type="button" class="cancel-btn">Cancelar</button>
-          <button type="button" class="submit-btn" id="continue-btn">
-            Continuar
-          </button>
-        </div>
-      </form>
+          <div class="button-container">
+            <button type="button" class="cancel-btn">Cancelar</button>
+            <button type="button" class="submit-btn" id="continue-btn">
+              Continuar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
 
     <!-- Footer -->
@@ -234,7 +364,11 @@
           class="footer-logo"
         />
         <div class="separator"></div>
-        <img src="../../assets/img/grupo aval logo.png" alt="Grupo Aval" class="footer-logo" />
+        <img
+          src="../../assets/img/grupo aval logo.png"
+          alt="Grupo Aval"
+          class="footer-logo"
+        />
       </div>
     </footer>
     <!-- Cargar primero el script de Pikaday -->
@@ -325,6 +459,15 @@
           window.location.href =
             "../seleccion-producto/seleccion-producto.html";
         });
+    </script>
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navSection = document.getElementById("nav-section");
+
+      hamburger.addEventListener("click", function () {
+        navSection.classList.toggle("active");
+        hamburger.classList.toggle("active"); // Cambia la hamburguesa a "X"
+      });
     </script>
   </body>
 </html>
