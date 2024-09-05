@@ -1,11 +1,15 @@
+html,
 body {
-  font-family: "Gellion", sans-serif;
-  background-color: #f5f7fc;
+  height: 100%;
   margin: 0;
-  padding: 0;
+  font-family: "Gellion", sans-serif;
+  background-color: #f1f3fa;
+  overflow-x: hidden; /* Evitar scroll horizontal no deseado */
+}
+
+body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .container-principal {
@@ -32,7 +36,6 @@ body {
   margin-top: 15px; /* Añadir espacio entre el contenido y el pie de página */
   position: relative; /* Asegura que se mantenga en el flujo del documento */
 }
-
 
 .product-grid,
 .pagination-message {
@@ -181,23 +184,90 @@ body {
   color: #7552cc !important;
 }
 
-.btn-block-custom-trasparent-2{
+.btn-block-custom-trasparent-2 {
   margin-top: 0 !important;
 }
 
 /* Media Queries para pantallas pequeñas */
-@media (max-width: 576px) {
-  .central-content {
-    text-align: center;
-    margin: 0;
+@media (min-width: 1400px) {
+  .form-container {
+    max-width: 500px;
+    padding: 40px;
   }
 
-  .product-card {
-    margin-bottom: 1rem;
+  h2 {
+    font-size: 1.4em;
   }
 
-  .btn-block-custom,
-  .btn-block-custom-trasparent {
-    width: 100%;
+  p {
+    font-size: 1em;
+  }
+
+  label {
+    font-size: 0.9em;
+  }
+
+  input[type="text"],
+  select {
+    font-size: 1em;
+    padding: 12px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1399px) {
+  .form-container {
+    max-width: 450px;
+    padding: 35px;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  p {
+    font-size: 0.95em;
+  }
+
+  input[type="text"],
+  select {
+    padding: 12px;
+    font-size: 0.95em;
+  }
+}
+
+@media (max-width: 767px) {
+  .form-container {
+    max-width: 100%;
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 1.1em;
+  }
+
+  p {
+    font-size: 0.85em;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  label {
+    font-size: 0.75em;
+  }
+
+  input[type="text"],
+  select {
+    padding: 10px;
+    font-size: 0.85em;
+  }
+
+  .checkbox-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 15px;
   }
 }
