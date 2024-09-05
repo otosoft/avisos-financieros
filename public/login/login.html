@@ -53,6 +53,19 @@
         position: relative;
         z-index: 1111;
         padding-left: 100px;
+        transition: transform 0.3s ease, opacity 0.3s ease; /* Añadir una transición suave */
+        transform: translateY(
+          -100%
+        ); /* Inicialmente oculto fuera de la pantalla */
+        opacity: 0;
+      }
+
+      .header .nav-section.active {
+        display: flex;
+        transform: translateY(
+          0
+        ); /* Mover el menú hacia la posición original cuando se activa */
+        opacity: 1;
       }
 
       /* Triángulo diagonal para el header */
@@ -121,7 +134,7 @@
         width: 100%;
         height: 3px;
         background-color: #333;
-        transition: all 0.3s ease;
+        transition: transform 0.3s ease, opacity 0.3s ease;
       }
 
       .hamburger.active div:nth-child(1) {
@@ -169,6 +182,10 @@
           padding: 20px;
         }
 
+        .btn-solid {
+          background: white !important;
+        }
+
         .header .nav-section {
           display: none;
           position: fixed; /* Cambiado de absolute a fixed para que el menú cubra toda la pantalla */
@@ -184,6 +201,10 @@
           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
           padding: 0 !important;
           padding-bottom: 20px !important;
+          overflow-y: auto; /* Permitir scroll dentro del menú si tiene muchos elementos */
+          max-height: calc(
+            100vh - 70px
+          ); /* Limitar la altura del menú para que no desborde el viewport */
         }
 
         .header .logo-section::after {
@@ -192,9 +213,28 @@
 
         .header .nav-section.active {
           display: flex;
+          flex-direction: column;
+          margin-top: 0;
+          position: absolute; /* Posiciona el menú relativo al header */
+          top: 100%; /* El menú comienza justo después del header */
+          left: 0;
+          width: 100%; /* El menú ocupa todo el ancho del header */
+          background: #4a90e2; /* Color de fondo azul */
+          z-index: 1000;
+          padding: 20px 0; /* Añade padding para darle espacio al contenido */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+          border-radius: 0 0 8px 8px; /* Bordes redondeados en la parte inferior del menú */
         }
 
+        /* Ajuste del header para asegurar que se comporte como referencia para el menú */
+        .header {
+          position: relative; /* Esto asegura que el menú con position: absolute se alinee con el header */
+          z-index: 999; /* Coloca el header por encima de otros elementos */
+        }
+
+        /* Estilos para los enlaces de navegación */
         .navigation {
+          display: flex;
           flex-direction: column;
           align-items: center;
           width: 100%;
@@ -203,12 +243,11 @@
         .navigation a {
           padding: 15px 0;
           margin: 0;
-          width: 80%;
+          width: 100%; /* Los enlaces ocupan todo el ancho del menú */
           text-align: center;
           color: white;
           font-size: 1.2em;
           border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Separador entre los enlaces */
-          transition: background-color 0.3s ease;
         }
 
         .navigation a:hover {
