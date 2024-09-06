@@ -5,66 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Código de Seguridad</title>
     <style>
-      .header {
+      .header-1 {
         width: 100%;
-        position: fixed;
-        top: 0;
-        left: 0;
+        background-color: white;
         z-index: 1000;
         display: flex;
         align-items: center;
-        justify-content: center;
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade una sombra sutil para separar el header del contenido */
-        padding: 0px 0; /* Un poco de espacio vertical dentro del header */
+        justify-content: space-between;
+        padding: 0px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        line-height: 0 !important;
       }
 
-      .header .container {
+      .header-1 .container-1 {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        max-width: 100%; /* Controla el ancho máximo del contenido dentro del header */
-        padding: 0 0px; /* Añade espacio lateral dentro del container */
-        box-sizing: border-box; /* Asegura que el padding esté incluido en el ancho total */
+        padding: 0 0px;
       }
 
-      .header .logo-section {
-        position: relative;
-        background-color: white; /* Fondo blanco */
-        padding: 10px 20px;
+      .header-1 .logo-section {
         display: flex;
         align-items: center;
-        z-index: 1;
+        position: relative;
       }
 
-      .header .logo-section::after {
-        content: "";
-        position: absolute;
-        left: 270px; /* Ajusta este valor para controlar el ángulo */
-        top: -9px;
-        width: 0;
-        height: 0;
-        border-top: 85px solid white; /* Ajusta la altura */
-        border-right: 100px solid #4a90e2; /* Color y tamaño del triángulo azul */
-        z-index: 1;
-      }
-
-      .header .logo-section img {
+      .header-1 .logo-section img {
         height: 50px;
-        z-index: 2; /* Asegura que el logo esté por encima del triángulo */
-        padding-left: 40px;
+        padding-left: 20px;
+        z-index: 222222222;
       }
 
-      .header .nav-section {
-        background: linear-gradient(90deg, #4a90e2 0%, #1c3d75 60%);
-        padding: 17px 20px;
+      .header-1 .nav-section {
+        background: linear-gradient(90deg, #4a90e2 0px, #1c3d75 700px);
+        padding: 20.5px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        position: relative;
         flex-grow: 1;
-        margin-left: 80px;
+        border-radius: 5px;
+        position: relative;
+        z-index: 1111;
+        padding-left: 100px;
+      }
+
+      .header-1 .nav-section.active {
+        display: flex;
+        transform: translateY(
+          0
+        ); /* Mover el menú hacia la posición original cuando se activa */
+        opacity: 1;
+      }
+
+      /* Triángulo diagonal para el header-1 */
+      .header-1 .logo-section::after {
+        content: "";
+        position: absolute;
+        left: 200px; /* Ajusta este valor para controlar el ángulo */
+        width: 0;
+        height: 0;
+        border-top: 75px solid white; /* Ajusta la altura */
+        border-right: 100px solid #4788d6; /* Color y tamaño del triángulo azul */
+        z-index: 1111111;
       }
 
       .navigation {
@@ -80,10 +83,6 @@
         font-weight: bold;
       }
 
-      .navigation span {
-        color: white;
-      }
-
       .buttons {
         display: flex;
         align-items: center;
@@ -91,11 +90,12 @@
 
       .btn-outline,
       .btn-solid {
-        padding: 10px 20px;
+        padding: 15px 20px;
         border-radius: 5px;
         font-weight: bold;
         text-decoration: none;
         margin-left: 10px;
+        font-size: 15px;
       }
 
       .btn-outline {
@@ -110,14 +110,45 @@
         border: 2px solid #4a90e2;
       }
 
+      /* Botón hamburguesa oculto por defecto */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 25px;
+        height: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .hamburger div {
+        width: 100%;
+        height: 3px;
+        background-color: #333;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      /* Footer */
       .footer {
         width: 100%;
-        background-color: transparent; /* Fondo transparente */
+        background-color: transparent;
         padding: 20px 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: auto;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
       }
 
       .footer-container {
@@ -126,19 +157,147 @@
       }
 
       .footer-logo {
-        height: 50px; /* Ajusta la altura del logo */
-        margin: 0 20px; /* Espacio entre los logos y el separador */
+        height: 50px;
+        margin: 0 20px;
       }
 
       .separator {
         width: 1px;
-        height: 50px; /* Igual a la altura de los logos */
-        background-color: rgba(
-          0,
-          0,
-          0,
-          0.1
-        ); /* Color gris claro para el separador */
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      /* Estilos para pantallas pequeñas (hamburguesa) */
+      @media (max-width: 960px) {
+        .header-1 {
+          line-height: 1 !important;
+        }
+
+        .header-1 .container-1 {
+          padding: 20px;
+        }
+
+        .btn-solid {
+          background: white !important;
+        }
+
+        .header-1 .nav-section {
+          display: none;
+          position: fixed; /* Cambiado de absolute a fixed para que el menú cubra toda la pantalla */
+          top: 70px;
+          left: 0;
+          width: 100%;
+          flex-direction: column;
+          background: #4a90e2;
+          justify-content: flex-start; /* Centrar los elementos verticalmente */
+          align-items: center;
+          padding-top: 20px;
+          z-index: 1000;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+          padding: 0 !important;
+          padding-bottom: 20px !important;
+          overflow-y: auto; /* Permitir scroll dentro del menú si tiene muchos elementos */
+          max-height: calc(
+            100vh - 70px
+          ); /* Limitar la altura del menú para que no desborde el viewport */
+        }
+
+        .header-1 .logo-section::after {
+          display: none;
+        }
+
+        .header-1 .nav-section.active {
+          display: flex;
+          flex-direction: column;
+          margin-top: 0;
+          position: absolute; /* Posiciona el menú relativo al header-1 */
+          top: 100%; /* El menú comienza justo después del header-1 */
+          left: 0;
+          width: 100%; /* El menú ocupa todo el ancho del header-1 */
+          background: #4a90e2; /* Color de fondo azul */
+          z-index: 1000;
+          padding: 20px 0; /* Añade padding para darle espacio al contenido */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+          border-radius: 0 0 8px 8px; /* Bordes redondeados en la parte inferior del menú */
+        }
+
+        /* Ajuste del header-1 para asegurar que se comporte como referencia para el menú */
+        .header-1 {
+          position: relative; /* Esto asegura que el menú con position: absolute se alinee con el header */
+          z-index: 999; /* Coloca el header por encima de otros elementos */
+        }
+
+        /* Estilos para los enlaces de navegación */
+        .navigation {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        .navigation a {
+          padding: 15px 0;
+          margin: 0;
+          width: 100%; /* Los enlaces ocupan todo el ancho del menú */
+          text-align: center;
+          color: white;
+          font-size: 1.2em;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Separador entre los enlaces */
+        }
+
+        .navigation a:hover {
+          background-color: rgba(
+            255,
+            255,
+            255,
+            0.1
+          ); /* Fondo al pasar el mouse o tocar */
+        }
+
+        .buttons {
+          display: flex;
+          flex-direction: column;
+          width: 80%; /* Ocupa el 80% del ancho para mayor accesibilidad */
+          margin-top: 20px;
+          gap: 15px; /* Espaciado entre botones */
+        }
+
+        .buttons a {
+          width: 100%;
+          text-align: center;
+          padding: 15px;
+          background-color: white;
+          color: #0056b3;
+          border: 2px solid #0056b3;
+          border-radius: 5px;
+          font-weight: bold;
+          transition: all 0.3s ease;
+        }
+
+        .buttons a:hover {
+          background-color: #0056b3;
+          color: white;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+
+        .footer-container {
+          flex-direction: column;
+        }
+
+        .footer-logo {
+          margin: 10px 0;
+        }
+
+        .separator {
+          display: none;
+        }
       }
     </style>
     <link
@@ -147,33 +306,34 @@
     />
     <link rel="stylesheet" href="../codigo-seguridad/assets/css/style.css" />
   </head>
-  <body
-    class="bg-light d-flex align-items-center justify-content-center vh-100"
-  >
-
-      <!-- Header -->
-      <header class="header">
-        <div class="container">
-          <div class="logo-section">
-            <img
-              src="../../assets/img/Logo_banco occidente.png"
-              alt="Banco de Occidente"
-            />
-          </div>
-          <div class="nav-section">
-            <nav class="navigation">
-              <a href="#">Personas</a>
-              <span>|</span>
-              <a href="#">Empresas</a>
-            </nav>
-            <div class="buttons">
-              <a href="#" class="btn-outline">Simula y Solicita</a>
-              <a href="#" class="btn-solid">Transacciones</a>
-            </div>
+  <body>
+    <!-- Header -->
+    <header class="header-1">
+      <div class="container-1">
+        <div class="logo-section">
+          <img
+            src="../../assets/img/Logo_banco occidente.png"
+            alt="Banco de Occidente"
+          />
+        </div>
+        <div class="hamburger" id="hamburger">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="nav-section" id="nav-section">
+          <nav class="navigation">
+            <a href="#">Personas</a>
+            <span>|</span>
+            <a href="#">Empresas</a>
+          </nav>
+          <div class="buttons">
+            <a href="#" class="btn-outline">Simula y Solicita</a>
+            <a href="#" class="btn-solid">Transacciones</a>
           </div>
         </div>
-      </header>
-  
+      </div>
+    </header>
 
     <div class="container">
       <div class="row justify-content-center">
@@ -259,6 +419,7 @@
       </div>
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
         <img

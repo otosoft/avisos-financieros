@@ -1,180 +1,289 @@
-body, html {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Gellion", sans-serif;
-    flex-direction: column;
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Gellion", sans-serif;
+  background-color: #f1f3fa;
+  overflow-x: hidden; /* Evitar scroll horizontal no deseado */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 .main-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
-    position: fixed;
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+  margin-top: 15px;
 }
 
 .back-link {
-    font-size: 14px;
-    color: #007bff;
-    text-decoration: none;
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
 }
 
-.col{
-    padding-bottom: 10px;
+.col {
+  padding-bottom: 10px;
 }
 
 .header-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 0px;
 }
 
 .subtitle {
-    font-size: 0.875rem;
-    color: #888;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    font-weight: normal !important;
+  font-size: 0.875rem;
+  color: #888;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-weight: normal !important;
 }
 
 .card-body {
-    padding: 20px;
+  padding: 20px;
 }
 
 .icon-container {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .icon {
-    width: 80px;
-    height: 80px;
+  width: 80px;
+  height: 80px;
 }
 
 .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
 .text-muted {
-    color: #9e9e9e;
-    font-size: 0.875rem;
+  color: #9e9e9e;
+  font-size: 0.875rem;
 }
 
 .account-number {
-    color: #7c4dff;
-    font-weight: bold;
-    font-size: 1.5rem;
-    margin-top: 0.25rem;
-}
-
-.account-number {
-    color: #7c4dff;
-    font-weight: bold;
-    font-size: 1.5rem;
+  color: #7c4dff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
 }
 
 .conditions {
-    margin-top: 20px;
+  margin-top: 20px;
 }
 
 .conditions h5 {
-    font-weight: bold;
-    margin-bottom: 10px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .conditions h6 {
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 40px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 .conditions hr {
-    margin-top: -5px;
-    margin-bottom: 20px;
+  margin-top: -5px;
+  margin-bottom: 20px;
 }
 
 .continue-button {
-    text-align: right;
+  text-align: right;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    box-shadow: none;
+  background-color: #007bff;
+  border-color: #007bff;
+  box-shadow: none;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
 
-.box-gray{
-    background-color: #f3f3f3;
-    border-radius: 10px;
-    padding-top: 15px;
-    padding-left: 15px;
-    padding-bottom: 5px;
-    margin-bottom: 40px;
+.box-gray {
+  background-color: #f3f3f3;
+  border-radius: 10px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-bottom: 5px;
+  margin-bottom: 40px;
 }
 
-p{
-    margin-bottom: 0 !important;
+p {
+  margin-bottom: 0 !important;
 }
 
-.card-centro{
-    margin: 0 auto;
-    border-radius: 15px;
+.card-centro {
+  margin: 0 auto;
+  border-radius: 15px;
 }
 
-.tittle-condicion{
-    text-align: center;
+.tittle-condicion {
+  text-align: center;
 }
 
-h6{
-    font-weight: normal !important;
-    color: #888;
+h6 {
+  font-weight: normal !important;
+  color: #888;
 }
 
-ul{
-    padding-left: 15px;
-    font-size: 15px;
-    color: #888;
+ul {
+  padding-left: 15px;
+  font-size: 15px;
+  color: #888;
 }
 
-.card-principal{
-    margin: 0 60px;
+.card-principal {
+  margin: 0 60px;
 }
 
-.padding-txt{
-    margin-top: 40px !important;
+.padding-txt {
+  margin-top: 40px !important;
 }
 
-h5{
-    font-size: 18px;
+h5 {
+  font-size: 18px;
 }
 
-.form-check-label{
-    color: #888;
-    padding-left: 10px;
+.form-check-label {
+  color: #888;
+  padding-left: 10px;
 }
 
-.form-check-input{
-    width: 20px;
-    height: 20px;
+.form-check-input {
+  width: 20px;
+  height: 20px;
 }
 
 .row-botton {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px; /* Espacio entre los botones */
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px; /* Espacio entre los botones */
 }
 
-.btn-primary-custom{
-    background: linear-gradient(to bottom, #4da6ff, #0056b3);
+.btn-primary-custom {
+  background: linear-gradient(to bottom, #4da6ff, #0056b3);
+}
+
+/* Media queries para pantallas medianas */
+@media (max-width: 1024px) {
+  .main-container {
+    max-width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+  }
+
+  .header-title {
+    font-size: 1.3rem;
+  }
+
+  .icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .card-principal {
+    margin: 0 30px;
+  }
+}
+
+/* Media queries para pantallas pequeñas (tabletas y móviles) */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 10px;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .header-title {
+    font-size: 1.2rem;
+  }
+
+  .subtitle {
+    font-size: 0.8rem;
+    margin-top: 0;
+  }
+
+  .icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .card-title {
+    font-size: 1.1rem;
+  }
+
+  .account-number {
+    font-size: 1.3rem;
+  }
+
+  .conditions h5,
+  .conditions h6 {
+    font-size: 1rem;
+  }
+
+  .card-principal {
+    margin: 0 20px;
+  }
+
+  .continue-button {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+/* Media queries para pantallas muy pequeñas (móviles en orientación vertical) */
+@media (max-width: 480px) {
+  .main-container {
+    padding: 5px;
+  }
+
+  .header-title {
+    font-size: 1rem;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+  }
+
+  .icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .card-title {
+    font-size: 1rem;
+  }
+
+  .account-number {
+    font-size: 1.2rem;
+  }
+
+  .conditions h5,
+  .conditions h6 {
+    font-size: 0.9rem;
+  }
+
+  .card-principal {
+    margin: 0 10px;
+  }
+
+  .box-gray {
+    padding: 10px;
+    margin-bottom: 20px;
+  }
 }

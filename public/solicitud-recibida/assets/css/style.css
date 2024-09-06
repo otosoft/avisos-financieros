@@ -1,64 +1,123 @@
+html,
 body {
-    background-color: #f0f4ff;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: "Gellion", sans-serif;
-    flex-direction: column;
+  height: 100%;
+  margin: 0;
+  font-family: "Gellion", sans-serif;
+  background-color: #f1f3fa;
+  overflow-x: hidden; /* Evitar scroll horizontal no deseado */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 .container-main {
-    max-width: 800px;
-    padding: 40px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    position: fixed; /* Posiciona la tarjeta de forma fija */
-    top: 50%; /* Coloca la tarjeta al 50% del alto de la pantalla */
-    left: 50%; /* Coloca la tarjeta al 50% del ancho de la pantalla */
-    transform: translate(-50%, -50%); /* Centra la tarjeta restando la mitad de su ancho y alto */
+  max-width: 800px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  margin: auto;
+  margin-top: 15px;
 }
 
 .icon {
-    width: 80px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin: 0 auto;
+  width: 80px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0 auto;
 }
 
 .btn-custom {
-    width: 100%;
-    margin-top: 20px;
-    background: linear-gradient(to bottom, #4da6ff, #0056b3);
-    padding: 8px;
+  width: 100%;
+  margin-top: 20px;
+  background: linear-gradient(to bottom, #4da6ff, #0056b3);
+  padding: 8px;
 }
 
-.d-flex{
-    margin: 0 40px !important;
+.d-flex {
+  margin: 0 40px !important;
 }
 
 .btn-custom:hover {
-    box-shadow: 0px 4px 10px rgba(0, 86, 179, 0.5);
+  box-shadow: 0px 4px 10px rgba(0, 86, 179, 0.5);
 }
 
-.btn-outline-primary{
-    border-color: #888 !important;
-    background: transparent !important;
-    color: #888;
+.btn-outline-primary {
+  border-color: #888 !important;
+  background: transparent !important;
+  color: #888;
 }
 
-.btn-outline-primary:hover{
-    background-color: transparent !important;
-    color: #888;
-    box-shadow: none !important;
+.btn-outline-primary:hover {
+  background-color: transparent !important;
+  color: #888;
+  box-shadow: none !important;
 }
 
-p{
-    font-size: 20px;
-    padding: 0px 80px;
-    color: #888;
+p {
+  font-size: 20px;
+  padding: 0px 80px;
+  color: #888;
+}
+
+/* Media queries para dispositivos medianos (tablets) */
+@media (max-width: 768px) {
+  .container-main {
+    padding: 20px;
+    max-width: 90%;
+    margin-top: 10px;
+  }
+
+  .icon {
+    width: 60px; /* Ajuste del tamaño del icono */
+  }
+
+  p {
+    font-size: 18px;
+    padding: 0 40px; /* Reduce el padding lateral */
+  }
+
+  .d-flex {
+    margin: 0 20px !important; /* Reduce el margen lateral */
+  }
+
+  .btn-custom {
+    padding: 10px; /* Aumenta un poco el padding del botón */
+  }
+}
+
+/* Media queries para dispositivos pequeños (móviles) */
+@media (max-width: 576px) {
+  .container-main {
+    padding: 15px;
+    max-width: 100%;
+    margin-top: 5px;
+  }
+
+  .icon {
+    width: 50px; /* Icono más pequeño para pantallas pequeñas */
+  }
+
+  p {
+    font-size: 16px;
+    padding: 0 20px; /* Reduce aún más el padding lateral */
+  }
+
+  .d-flex {
+    margin: 0 10px !important;
+    margin-left: 0 !important;
+  }
+
+  .btn-custom {
+    padding: 12px; /* Botones más grandes en móviles */
+    font-size: 0.9rem;
+  }
+
+  .btn-outline-primary {
+    font-size: 0.9rem;
+  }
 }
