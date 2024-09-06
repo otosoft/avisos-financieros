@@ -272,6 +272,17 @@ p {
   height: 25px;
   border-color: #afafaf;
 }
+.form-check-input {
+  margin-top: -15px !important;
+}
+
+.mt-4 {
+  gap: 20px;
+}
+
+.form-check-input-custom-2 {
+  margin-top: 10px !important;
+}
 
 /* Media query for medium devices */
 @media (max-width: 827px) {
@@ -340,14 +351,19 @@ p {
   }
 
   .text-center {
-    text-align: left !important;
+    text-align: center !important;
   }
 
   .text-result-custom {
     transform: translateY(-40px);
+    text-align: center !important;
   }
 
   .row-custom {
-    margin-bottom: -40px !important;
+    transform: translateY(40px);
+  }
+
+  .form-check-input-3 {
+    margin-left: -100px !important;
   }
 }
