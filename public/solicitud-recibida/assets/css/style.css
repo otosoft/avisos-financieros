@@ -5,6 +5,7 @@ body {
   font-family: "Gellion", sans-serif;
   background-color: #f1f3fa;
   overflow-x: hidden; /* Evitar scroll horizontal no deseado */
+  align-items: center;
 }
 
 body {
@@ -40,6 +41,7 @@ body {
 
 .d-flex {
   margin: 0 40px !important;
+  gap: 20px;
 }
 
 .btn-custom:hover {
