@@ -24,6 +24,7 @@ body {
     -50%
   ); /* Centra la tarjeta restando la mitad de su ancho y alto */
   margin-top: 15px;
+  margin-bottom: 55px;
 }
 
 .box-gray {
