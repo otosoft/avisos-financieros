@@ -107,6 +107,16 @@ select {
   padding-right: 30px;
 }
 
+#actividad-economica {
+  width: 95%;
+  padding-right: 30px;
+}
+
+#ciudad {
+  width: 95%;
+  padding-right: 30px;
+}
+
 input::placeholder {
   color: #999;
 }
@@ -179,6 +189,69 @@ input::placeholder {
 
 .cancel-btn:hover {
   background-color: #e0e0e0;
+}
+
+.box-gray {
+  background-color: #f3f3f3;
+  padding-left: 20px;
+  padding-top: 10px;
+  border-radius: 8px;
+  margin-top: -20px;
+  margin-left: -20px;
+  margin-right: -20px;
+  text-align: left !important;
+  margin-bottom: 30px !important;
+}
+
+.box-gray p {
+  text-align: left;
+  padding: 0 !important;
+  padding-bottom: 10px !important;
+  color: #000 !important;
+}
+
+.progress-container {
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  text-align: left;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #0994dc;
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  height: 5px;
+  margin-bottom: 10px;
+}
+
+.progress {
+  width: 0%;
+  background-color: #09dc17;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.progress-2 {
+  width: 50%;
+  background-color: #09dc17;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.step {
+  font-size: 12px;
+  color: #555;
 }
 
 @media (min-width: 1400px) {

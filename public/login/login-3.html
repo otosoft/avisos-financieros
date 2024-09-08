@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../login/assets/css/style.css" />
+    <style>
+      .pika-single {
+        z-index: 9999;
+        display: block;
+        position: relative;
+        color: #333;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-bottom-color: #bbb;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+      .pika-single:after,
+      .pika-single:before {
+        content: " ";
+        display: table;
+      }
+      .pika-single:after {
+        clear: both;
+      }
+      .pika-single.is-hidden {
+        display: none;
+      }
+      .pika-single.is-bound {
+        position: absolute;
+        box-shadow: 0 5px 15px -5px rgba(0, 0, 0, 0.5);
+      }
+      .pika-lendar {
+        float: left;
+        width: 240px;
+        margin: 8px;
+      }
+      .pika-title {
+        position: relative;
+        text-align: center;
+      }
+      .pika-label {
+        display: inline-block;
+        position: relative;
+        z-index: 9999;
+        overflow: hidden;
+        margin: 0;
+        padding: 5px 3px;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 700;
+        background-color: #fff;
+      }
+      .pika-title select {
+        cursor: pointer;
+        position: absolute;
+        z-index: 9998;
+        margin: 0;
+        left: 0;
+        top: 5px;
+        opacity: 0;
+      }
+      .pika-next,
+      .pika-prev {
+        display: block;
+        cursor: pointer;
+        position: relative;
+        outline: 0;
+        border: 0;
+        padding: 0;
+        width: 20px;
+        height: 30px;
+        text-indent: 20px;
+        white-space: nowrap;
+        overflow: hidden;
+        background-color: transparent;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 75% 75%;
+        opacity: 0.5;
+      }
+      .pika-next:hover,
+      .pika-prev:hover {
+        opacity: 1;
+      }
+      .is-rtl .pika-next,
+      .pika-prev {
+        float: left;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAUklEQVR42u3VMQoAIBADQf8Pgj+OD9hG2CtONJB2ymQkKe0HbwAP0xucDiQWARITIDEBEnMgMQ8S8+AqBIl6kKgHiXqQqAeJepBo/z38J/U0uAHlaBkBl9I4GwAAAABJRU5ErkJggg==);
+      }
+      .is-rtl .pika-prev,
+      .pika-next {
+        float: right;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAYAAAAsEj5rAAAAU0lEQVR42u3VOwoAMAgE0dwfAnNjU26bYkBCFGwfiL9VVWoO+BJ4Gf3gtsEKKoFBNTCoCAYVwaAiGNQGMUHMkjGbgjk2mIONuXo0nC8XnCf1JXgArVIZAQh5TKYAAAAASUVORK5CYII=);
+      }
+      .pika-next.is-disabled,
+      .pika-prev.is-disabled {
+        cursor: default;
+        opacity: 0.2;
+      }
+      .pika-select {
+        display: inline-block;
+      }
+      .pika-table {
+        width: 100%;
+        border-collapse: collapse;
+        border-spacing: 0;
+        border: 0;
+      }
+      .pika-table td,
+      .pika-table th {
+        width: 14.285714285714286%;
+        padding: 0;
+      }
+      .pika-table th {
+        color: #999;
+        font-size: 12px;
+        line-height: 25px;
+        font-weight: 700;
+        text-align: center;
+      }
+      .pika-button {
+        cursor: pointer;
+        display: block;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        outline: 0;
+        border: 0;
+        margin: 0;
+        width: 100%;
+        padding: 5px;
+        color: #666;
+        font-size: 12px;
+        line-height: 15px;
+        text-align: right;
+        background: #f5f5f5;
+      }
+      .pika-week {
+        font-size: 11px;
+        color: #999;
+      }
+      .is-today .pika-button {
+        color: #3af;
+        font-weight: 700;
+      }
+      .has-event .pika-button,
+      .is-selected .pika-button {
+        color: #fff;
+        font-weight: 700;
+        background: #3af;
+        box-shadow: inset 0 1px 3px #178fe5;
+        border-radius: 3px;
+      }
+      .has-event .pika-button {
+        background: #005da9;
+        box-shadow: inset 0 1px 3px #0076c9;
+      }
+      .is-disabled .pika-button,
+      .is-inrange .pika-button {
+        background: #d5e9f7;
+      }
+      .is-startrange .pika-button {
+        color: #fff;
+        background: #6cb31d;
+        box-shadow: none;
+        border-radius: 3px;
+      }
+      .is-endrange .pika-button {
+        color: #fff;
+        background: #3af;
+        box-shadow: none;
+        border-radius: 3px;
+      }
+      .is-disabled .pika-button {
+        pointer-events: none;
+        cursor: default;
+        color: #999;
+        opacity: 0.3;
+      }
+      .is-outside-current-month .pika-button {
+        color: #999;
+        opacity: 0.3;
+      }
+      .is-selection-disabled {
+        pointer-events: none;
+        cursor: default;
+      }
+      .pika-button:hover,
+      .pika-row.pick-whole-week:hover .pika-button {
+        color: #fff;
+        background: #ff8000;
+        box-shadow: none;
+        border-radius: 3px;
+      }
+      .pika-table abbr {
+        border-bottom: none;
+        cursor: help;
+      }
+    </style>
+
+    <title>Formulario de Solicitud</title>
+    <style>
+      .header {
+        width: 100%;
+        background-color: white;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px 0;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .header .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 0 0px;
+      }
+
+      .header .logo-section {
+        display: flex;
+        align-items: center;
+        position: relative;
+      }
+
+      .header .logo-section img {
+        height: 50px;
+        padding-left: 20px;
+        z-index: 222222222;
+      }
+
+      .header .nav-section {
+        background: linear-gradient(90deg, #4a90e2 0px, #1c3d75 700px);
+        padding: 20.5px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-grow: 1;
+        border-radius: 5px;
+        position: relative;
+        z-index: 1111;
+        padding-left: 100px;
+      }
+
+      .header .nav-section.active {
+        display: flex;
+        transform: translateY(
+          0
+        ); /* Mover el menú hacia la posición original cuando se activa */
+        opacity: 1;
+      }
+
+      /* Triángulo diagonal para el header */
+      .header .logo-section::after {
+        content: "";
+        position: absolute;
+        left: 200px; /* Ajusta este valor para controlar el ángulo */
+        width: 0;
+        height: 0;
+        border-top: 85px solid white; /* Ajusta la altura */
+        border-right: 100px solid #4788d6; /* Color y tamaño del triángulo azul */
+        z-index: 1111111;
+      }
+
+      .navigation {
+        display: flex;
+        align-items: center;
+        margin-right: auto;
+      }
+
+      .navigation a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+        font-weight: bold;
+      }
+
+      .buttons {
+        display: flex;
+        align-items: center;
+      }
+
+      .btn-outline,
+      .btn-solid {
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        margin-left: 10px;
+      }
+
+      .btn-outline {
+        color: white;
+        border: 2px solid white;
+        background-color: transparent;
+      }
+
+      .btn-solid {
+        color: white;
+        background: linear-gradient(to bottom, #4da6ff, #0056b3);
+        border: 2px solid #4a90e2;
+      }
+
+      /* Botón hamburguesa oculto por defecto */
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 25px;
+        height: 25px;
+        transition: all 0.3s ease;
+      }
+
+      .hamburger div {
+        width: 100%;
+        height: 3px;
+        background-color: #333;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+
+      .hamburger.active div:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .hamburger.active div:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger.active div:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      /* Footer */
+      .footer {
+        width: 100%;
+        background-color: transparent;
+        padding: 20px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .footer-container {
+        display: flex;
+        align-items: center;
+      }
+
+      .footer-logo {
+        height: 50px;
+        margin: 0 20px;
+      }
+
+      .separator {
+        width: 1px;
+        height: 50px;
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      /* Estilos para pantallas pequeñas (hamburguesa) */
+      @media (max-width: 960px) {
+        .header .container {
+          padding: 20px;
+        }
+
+        .btn-solid {
+          background: white !important;
+        }
+
+        .header .nav-section {
+          display: none;
+          position: fixed; /* Cambiado de absolute a fixed para que el menú cubra toda la pantalla */
+          top: 70px;
+          left: 0;
+          width: 100%;
+          flex-direction: column;
+          background: #4a90e2;
+          justify-content: flex-start; /* Centrar los elementos verticalmente */
+          align-items: center;
+          padding-top: 20px;
+          z-index: 1000;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+          padding: 0 !important;
+          padding-bottom: 20px !important;
+          overflow-y: auto; /* Permitir scroll dentro del menú si tiene muchos elementos */
+          max-height: calc(
+            100vh - 70px
+          ); /* Limitar la altura del menú para que no desborde el viewport */
+        }
+
+        .header .logo-section::after {
+          display: none;
+        }
+
+        .header .nav-section.active {
+          display: flex;
+          flex-direction: column;
+          margin-top: 0;
+          position: absolute; /* Posiciona el menú relativo al header */
+          top: 100%; /* El menú comienza justo después del header */
+          left: 0;
+          width: 100%; /* El menú ocupa todo el ancho del header */
+          background: #4a90e2; /* Color de fondo azul */
+          z-index: 1000;
+          padding: 20px 0; /* Añade padding para darle espacio al contenido */
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+          border-radius: 0 0 8px 8px; /* Bordes redondeados en la parte inferior del menú */
+        }
+
+        /* Ajuste del header para asegurar que se comporte como referencia para el menú */
+        .header {
+          position: relative; /* Esto asegura que el menú con position: absolute se alinee con el header */
+          z-index: 999; /* Coloca el header por encima de otros elementos */
+        }
+
+        /* Estilos para los enlaces de navegación */
+        .navigation {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 100%;
+        }
+
+        .navigation a {
+          padding: 15px 0;
+          margin: 0;
+          width: 100%; /* Los enlaces ocupan todo el ancho del menú */
+          text-align: center;
+          color: white;
+          font-size: 1.2em;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Separador entre los enlaces */
+        }
+
+        .navigation a:hover {
+          background-color: rgba(
+            255,
+            255,
+            255,
+            0.1
+          ); /* Fondo al pasar el mouse o tocar */
+        }
+
+        .buttons {
+          display: flex;
+          flex-direction: column;
+          width: 80%; /* Ocupa el 80% del ancho para mayor accesibilidad */
+          margin-top: 20px;
+          gap: 15px; /* Espaciado entre botones */
+        }
+
+        .buttons a {
+          width: 100%;
+          text-align: center;
+          padding: 15px;
+          background-color: white;
+          color: #0056b3;
+          border: 2px solid #0056b3;
+          border-radius: 5px;
+          font-weight: bold;
+          transition: all 0.3s ease;
+        }
+
+        .buttons a:hover {
+          background-color: #0056b3;
+          color: white;
+        }
+
+        .hamburger {
+          display: flex;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+
+        .footer-container {
+          flex-direction: column;
+        }
+
+        .footer-logo {
+          margin: 10px 0;
+        }
+
+        .separator {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="logo-section">
+          <img
+            src="../../assets/img/Logo_banco occidente.png"
+            alt="Banco de Occidente"
+          />
+        </div>
+        <div class="hamburger" id="hamburger">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="nav-section" id="nav-section">
+          <nav class="navigation">
+            <a href="#">Personas</a>
+            <span>|</span>
+            <a href="#">Empresas</a>
+          </nav>
+          <div class="buttons">
+            <a href="#" class="btn-outline">Simula y Solicita</a>
+            <a href="#" class="btn-solid">Transacciones</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="main-content">
+      <div class="form-container">
+        <div class="box-gray">
+          <a
+            href="../login/login-2.html"
+            class="btn btn-link text-left btn-link-back"
+          >
+            < Atrás</a
+          >
+          <p>Verifica que tus datos sean correctos</p>
+        </div>
+        <form>
+          <div class="progress-container">
+            <div class="title">Información básica</div>
+            <div class="progress-bar">
+              <div class="progress"></div>
+            </div>
+            <div class="step">1 de 2</div>
+          </div>
+
+          <label for="tipo-documento">Tipo de documento</label>
+          <select id="tipo-documento" name="tipo-documento" required>
+            <option value="" disabled selected>Seleccione</option>
+            <option value="cedula">Cédula de Ciudadanía</option>
+            <option value="pasaporte">Pasaporte</option>
+          </select>
+
+          <label for="numero-documento">Número de documento</label>
+          <input
+            type="text"
+            id="numero-documento"
+            name="numero-documento"
+            placeholder="Ej: 1023454041"
+            required
+          />
+
+          <label for="fecha-expedicion">Fecha de expedición</label>
+          <input
+            type="text"
+            id="fecha-expedicion"
+            name="fecha-expedicion"
+            placeholder="DD/MM/AAAA"
+            required
+          />
+
+          <label for="nombres">Nombres</label>
+          <input
+            type="text"
+            id="nombres"
+            name="nombres"
+            placeholder="Ej: Miguel"
+            required
+          />
+
+          <label for="apellidos">Apellidos</label>
+          <input
+            type="text"
+            id="apellidos"
+            name="apellidos"
+            placeholder="Ej: Rodriguez Rincon"
+            required
+          />
+          <div class="button-container">
+            <button
+              type="button"
+              class="cancel-btn"
+              onclick="window.location.href='../login/login-2.html'"
+            >
+              Cancelar
+            </button>
+            <button type="button" class="submit-btn" id="continue-btn">
+              Continuar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <img
+          src="../../assets/img/Logo.png"
+          alt="Banco de Occidente"
+          class="footer-logo"
+        />
+        <div class="separator"></div>
+        <img
+          src="../../assets/img/grupo aval logo.png"
+          alt="Grupo Aval"
+          class="footer-logo"
+        />
+      </div>
+    </footer>
+    <!-- Cargar primero el script de Pikaday -->
+    <script>
+      !(function (e, t) {
+        "use strict";
+        var n;
+        if ("object" == typeof exports) {
+          try {
+            n = require("moment");
+          } catch (e) {}
+          module.exports = t(n);
+        } else
+          "function" == typeof define && define.amd
+            ? define(function (e) {
+                try {
+                  n = e("moment");
+                } catch (e) {}
+                return t(n);
+              })
+            : (e.Pikaday = t(e.moment));
+      })(this, function (n) {
+        "use strict";
+        var s = "function" == typeof n,
+          o = !!window.addEventListener,
+          c = window.document,
+          h = window.setTimeout,
+          r = function (e, t, n, a) {
+            o ? e.addEventListener(t, n, !!a) : e.attachEvent("on" + t, n);
+          },
+          t = function (e, t, n, a) {
+            o ? e.removeEventListener(t, n, !!a) : e.detachEvent("on" + t, n);
+          },
+          l = function (e, t) {
+            return -1 !== (" " + e.className + " ").indexOf(" " + t + " ");
+          },
+          f = function (e, t) {
+            l(e, t) ||
+              (e.className = "" === e.className ? t : e.className + " " + t);
+          },
+          g = function (e, t) {
+            var n;
+            e.className = (n = (" " + e.className + " ").replace(
+              " " + t + " ",
+              " "
+            )).trim
+              ? n.trim()
+              : n.replace(/^\s+|\s+$/g, "");
+          },
+          y = function (e) {
+            return /Array/.test(Object.prototype.toString.call(e));
+          },
+          F = function (e) {
+            return (
+              /Date/.test(Object.prototype.toString.call(e)) &&
+              !isNaN(e.getTime())
+            );
+          },
+          L = function (e, t) {
+            return [
+              31,
+              ((n = e), (n % 4 == 0 && n % 100 != 0) || n % 400 == 0 ? 29 : 28),
+              31,
+              30,
+              31,
+              30,
+              31,
+              31,
+              30,
+              31,
+              30,
+              31,
+            ][t];
+            var n;
+          },
+          P = function (e) {
+            F(e) && e.setHours(0, 0, 0, 0);
+          },
+          B = function (e, t) {
+            return e.getTime() === t.getTime();
+          },
+          d = function (e, t, n) {
+            var a, i;
+            for (a in t)
+              (i = void 0 !== e[a]) &&
+              "object" == typeof t[a] &&
+              null !== t[a] &&
+              void 0 === t[a].nodeName
+                ? F(t[a])
+                  ? n && (e[a] = new Date(t[a].getTime()))
+                  : y(t[a])
+                  ? n && (e[a] = t[a].slice(0))
+                  : (e[a] = d({}, t[a], n))
+                : (!n && i) || (e[a] = t[a]);
+            return e;
+          },
+          i = function (e, t, n) {
+            var a;
+            c.createEvent
+              ? ((a = c.createEvent("HTMLEvents")).initEvent(t, !0, !1),
+                (a = d(a, n)),
+                e.dispatchEvent(a))
+              : c.createEventObject &&
+                ((a = c.createEventObject()),
+                (a = d(a, n)),
+                e.fireEvent("on" + t, a));
+          },
+          a = function (e) {
+            return (
+              e.month < 0 &&
+                ((e.year -= Math.ceil(Math.abs(e.month) / 12)),
+                (e.month += 12)),
+              11 < e.month &&
+                ((e.year += Math.floor(Math.abs(e.month) / 12)),
+                (e.month -= 12)),
+              e
+            );
+          },
+          u = {
+            field: null,
+            bound: void 0,
+            ariaLabel: "Use the arrow keys to pick a date",
+            position: "bottom left",
+            reposition: !0,
+            format: "YYYY-MM-DD",
+            toString: null,
+            parse: null,
+            defaultDate: null,
+            setDefaultDate: !1,
+            firstDay: 0,
+            formatStrict: !1,
+            minDate: null,
+            maxDate: null,
+            yearRange: 10,
+            showWeekNumber: !1,
+            pickWholeWeek: !1,
+            minYear: 0,
+            maxYear: 9999,
+            minMonth: void 0,
+            maxMonth: void 0,
+            startRange: null,
+            endRange: null,
+            isRTL: !1,
+            yearSuffix: "",
+            showMonthAfterYear: !1,
+            showDaysInNextAndPreviousMonths: !1,
+            enableSelectionDaysInNextAndPreviousMonths: !1,
+            numberOfMonths: 1,
+            mainCalendar: "left",
+            container: void 0,
+            blurFieldOnSelect: !0,
+            i18n: {
+              previousMonth: "Previous Month",
+              nextMonth: "Next Month",
+              months: [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+              ],
+              weekdays: [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ],
+              weekdaysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+            },
+            theme: null,
+            events: [],
+            onSelect: null,
+            onOpen: null,
+            onClose: null,
+            onDraw: null,
+            keyboardInput: !0,
+          },
+          m = function (e, t, n) {
+            for (t += e.firstDay; 7 <= t; ) t -= 7;
+            return n ? e.i18n.weekdaysShort[t] : e.i18n.weekdays[t];
+          },
+          H = function (e) {
+            var t = [],
+              n = "false";
+            if (e.isEmpty) {
+              if (!e.showDaysInNextAndPreviousMonths)
+                return '<td class="is-empty"></td>';
+              t.push("is-outside-current-month"),
+                e.enableSelectionDaysInNextAndPreviousMonths ||
+                  t.push("is-selection-disabled");
+            }
+            return (
+              e.isDisabled && t.push("is-disabled"),
+              e.isToday && t.push("is-today"),
+              e.isSelected && (t.push("is-selected"), (n = "true")),
+              e.hasEvent && t.push("has-event"),
+              e.isInRange && t.push("is-inrange"),
+              e.isStartRange && t.push("is-startrange"),
+              e.isEndRange && t.push("is-endrange"),
+              '<td data-day="' +
+                e.day +
+                '" class="' +
+                t.join(" ") +
+                '" aria-selected="' +
+                n +
+                '"><button class="pika-button pika-day" type="button" data-pika-year="' +
+                e.year +
+                '" data-pika-month="' +
+                e.month +
+                '" data-pika-day="' +
+                e.day +
+                '">' +
+                e.day +
+                "</button></td>"
+            );
+          },
+          p = function (e, t, n, a, i, s) {
+            var o,
+              r,
+              l,
+              h,
+              d,
+              u = e._o,
+              c = n === u.minYear,
+              f = n === u.maxYear,
+              g =
+                '<div id="' +
+                s +
+                '" class="pika-title" role="heading" aria-live="assertive">',
+              m = !0,
+              p = !0;
+            for (l = [], o = 0; o < 12; o++)
+              l.push(
+                '<option value="' +
+                  (n === i ? o - t : 12 + o - t) +
+                  '"' +
+                  (o === a ? ' selected="selected"' : "") +
+                  ((c && o < u.minMonth) || (f && o > u.maxMonth)
+                    ? 'disabled="disabled"'
+                    : "") +
+                  ">" +
+                  u.i18n.months[o] +
+                  "</option>"
+              );
+            for (
+              h =
+                '<div class="pika-label">' +
+                u.i18n.months[a] +
+                '<select class="pika-select pika-select-month" tabindex="-1">' +
+                l.join("") +
+                "</select></div>",
+                y(u.yearRange)
+                  ? ((o = u.yearRange[0]), (r = u.yearRange[1] + 1))
+                  : ((o = n - u.yearRange), (r = 1 + n + u.yearRange)),
+                l = [];
+              o < r && o <= u.maxYear;
+              o++
+            )
+              o >= u.minYear &&
+                l.push(
+                  '<option value="' +
+                    o +
+                    '"' +
+                    (o === n ? ' selected="selected"' : "") +
+                    ">" +
+                    o +
+                    "</option>"
+                );
+            return (
+              (d =
+                '<div class="pika-label">' +
+                n +
+                u.yearSuffix +
+                '<select class="pika-select pika-select-year" tabindex="-1">' +
+                l.join("") +
+                "</select></div>"),
+              u.showMonthAfterYear ? (g += d + h) : (g += h + d),
+              c && (0 === a || u.minMonth >= a) && (m = !1),
+              f && (11 === a || u.maxMonth <= a) && (p = !1),
+              0 === t &&
+                (g +=
+                  '<button class="pika-prev' +
+                  (m ? "" : " is-disabled") +
+                  '" type="button">' +
+                  u.i18n.previousMonth +
+                  "</button>"),
+              t === e._o.numberOfMonths - 1 &&
+                (g +=
+                  '<button class="pika-next' +
+                  (p ? "" : " is-disabled") +
+                  '" type="button">' +
+                  u.i18n.nextMonth +
+                  "</button>"),
+              g + "</div>"
+            );
+          },
+          V = function (e, t, n) {
+            return (
+              '<table cellpadding="0" cellspacing="0" class="pika-table" role="grid" aria-labelledby="' +
+              n +
+              '">' +
+              (function (e) {
+                var t,
+                  n = [];
+                for (e.showWeekNumber && n.push("<th></th>"), t = 0; t < 7; t++)
+                  n.push(
+                    '<th scope="col"><abbr title="' +
+                      m(e, t) +
+                      '">' +
+                      m(e, t, !0) +
+                      "</abbr></th>"
+                  );
+                return (
+                  "<thead><tr>" +
+                  (e.isRTL ? n.reverse() : n).join("") +
+                  "</tr></thead>"
+                );
+              })(e) +
+              ("<tbody>" + t.join("") + "</tbody>") +
+              "</table>"
+            );
+          },
+          e = function (e) {
+            var a = this,
+              i = a.config(e);
+            (a._onMouseDown = function (e) {
+              if (a._v) {
+                var t = (e = e || window.event).target || e.srcElement;
+                if (t)
+                  if (
+                    (l(t, "is-disabled") ||
+                      (!l(t, "pika-button") ||
+                      l(t, "is-empty") ||
+                      l(t.parentNode, "is-disabled")
+                        ? l(t, "pika-prev")
+                          ? a.prevMonth()
+                          : l(t, "pika-next") && a.nextMonth()
+                        : (a.setDate(
+                            new Date(
+                              t.getAttribute("data-pika-year"),
+                              t.getAttribute("data-pika-month"),
+                              t.getAttribute("data-pika-day")
+                            )
+                          ),
+                          i.bound &&
+                            h(function () {
+                              a.hide(),
+                                i.blurFieldOnSelect &&
+                                  i.field &&
+                                  i.field.blur();
+                            }, 100))),
+                    l(t, "pika-select"))
+                  )
+                    a._c = !0;
+                  else {
+                    if (!e.preventDefault) return (e.returnValue = !1);
+                    e.preventDefault();
+                  }
+              }
+            }),
+              (a._onChange = function (e) {
+                var t = (e = e || window.event).target || e.srcElement;
+                t &&
+                  (l(t, "pika-select-month")
+                    ? a.gotoMonth(t.value)
+                    : l(t, "pika-select-year") && a.gotoYear(t.value));
+              }),
+              (a._onKeyChange = function (e) {
+                if (((e = e || window.event), a.isVisible()))
+                  switch (e.keyCode) {
+                    case 13:
+                    case 27:
+                      i.field && i.field.blur();
+                      break;
+                    case 37:
+                      e.preventDefault(), a.adjustDate("subtract", 1);
+                      break;
+                    case 38:
+                      a.adjustDate("subtract", 7);
+                      break;
+                    case 39:
+                      a.adjustDate("add", 1);
+                      break;
+                    case 40:
+                      a.adjustDate("add", 7);
+                  }
+              }),
+              (a._onInputChange = function (e) {
+                var t;
+                e.firedBy !== a &&
+                  ((t = i.parse
+                    ? i.parse(i.field.value, i.format)
+                    : s
+                    ? (t = n(i.field.value, i.format, i.formatStrict)) &&
+                      t.isValid()
+                      ? t.toDate()
+                      : null
+                    : new Date(Date.parse(i.field.value))),
+                  F(t) && a.setDate(t),
+                  a._v || a.show());
+              }),
+              (a._onInputFocus = function () {
+                a.show();
+              }),
+              (a._onInputClick = function () {
+                a.show();
+              }),
+              (a._onInputBlur = function () {
+                var e = c.activeElement;
+                do {
+                  if (l(e, "pika-single")) return;
+                } while ((e = e.parentNode));
+                a._c ||
+                  (a._b = h(function () {
+                    a.hide();
+                  }, 50)),
+                  (a._c = !1);
+              }),
+              (a._onClick = function (e) {
+                var t = (e = e || window.event).target || e.srcElement,
+                  n = t;
+                if (t) {
+                  !o &&
+                    l(t, "pika-select") &&
+                    (t.onchange ||
+                      (t.setAttribute("onchange", "return;"),
+                      r(t, "change", a._onChange)));
+                  do {
+                    if (l(n, "pika-single") || n === i.trigger) return;
+                  } while ((n = n.parentNode));
+                  a._v && t !== i.trigger && n !== i.trigger && a.hide();
+                }
+              }),
+              (a.el = c.createElement("div")),
+              (a.el.className =
+                "pika-single" +
+                (i.isRTL ? " is-rtl" : "") +
+                (i.theme ? " " + i.theme : "")),
+              r(a.el, "mousedown", a._onMouseDown, !0),
+              r(a.el, "touchend", a._onMouseDown, !0),
+              r(a.el, "change", a._onChange),
+              i.keyboardInput && r(c, "keydown", a._onKeyChange),
+              i.field &&
+                (i.container
+                  ? i.container.appendChild(a.el)
+                  : i.bound
+                  ? c.body.appendChild(a.el)
+                  : i.field.parentNode.insertBefore(a.el, i.field.nextSibling),
+                r(i.field, "change", a._onInputChange),
+                i.defaultDate ||
+                  (s && i.field.value
+                    ? (i.defaultDate = n(i.field.value, i.format).toDate())
+                    : (i.defaultDate = new Date(Date.parse(i.field.value))),
+                  (i.setDefaultDate = !0)));
+            var t = i.defaultDate;
+            F(t)
+              ? i.setDefaultDate
+                ? a.setDate(t, !0)
+                : a.gotoDate(t)
+              : a.gotoDate(new Date()),
+              i.bound
+                ? (this.hide(),
+                  (a.el.className += " is-bound"),
+                  r(i.trigger, "click", a._onInputClick),
+                  r(i.trigger, "focus", a._onInputFocus),
+                  r(i.trigger, "blur", a._onInputBlur))
+                : this.show();
+          };
+        return (
+          (e.prototype = {
+            config: function (e) {
+              this._o || (this._o = d({}, u, !0));
+              var t = d(this._o, e, !0);
+              (t.isRTL = !!t.isRTL),
+                (t.field = t.field && t.field.nodeName ? t.field : null),
+                (t.theme =
+                  "string" == typeof t.theme && t.theme ? t.theme : null),
+                (t.bound = !!(void 0 !== t.bound
+                  ? t.field && t.bound
+                  : t.field)),
+                (t.trigger =
+                  t.trigger && t.trigger.nodeName ? t.trigger : t.field),
+                (t.disableWeekends = !!t.disableWeekends),
+                (t.disableDayFn =
+                  "function" == typeof t.disableDayFn ? t.disableDayFn : null);
+              var n = parseInt(t.numberOfMonths, 10) || 1;
+              if (
+                ((t.numberOfMonths = 4 < n ? 4 : n),
+                F(t.minDate) || (t.minDate = !1),
+                F(t.maxDate) || (t.maxDate = !1),
+                t.minDate &&
+                  t.maxDate &&
+                  t.maxDate < t.minDate &&
+                  (t.maxDate = t.minDate = !1),
+                t.minDate && this.setMinDate(t.minDate),
+                t.maxDate && this.setMaxDate(t.maxDate),
+                y(t.yearRange))
+              ) {
+                var a = new Date().getFullYear() - 10;
+                (t.yearRange[0] = parseInt(t.yearRange[0], 10) || a),
+                  (t.yearRange[1] = parseInt(t.yearRange[1], 10) || a);
+              } else
+                (t.yearRange =
+                  Math.abs(parseInt(t.yearRange, 10)) || u.yearRange),
+                  100 < t.yearRange && (t.yearRange = 100);
+              return t;
+            },
+            toString: function (e) {
+              return (
+                (e = e || this._o.format),
+                F(this._d)
+                  ? this._o.toString
+                    ? this._o.toString(this._d, e)
+                    : s
+                    ? n(this._d).format(e)
+                    : this._d.toDateString()
+                  : ""
+              );
+            },
+            getMoment: function () {
+              return s ? n(this._d) : null;
+            },
+            setMoment: function (e, t) {
+              s && n.isMoment(e) && this.setDate(e.toDate(), t);
+            },
+            getDate: function () {
+              return F(this._d) ? new Date(this._d.getTime()) : null;
+            },
+            setDate: function (e, t) {
+              if (!e)
+                return (
+                  (this._d = null),
+                  this._o.field &&
+                    ((this._o.field.value = ""),
+                    i(this._o.field, "change", { firedBy: this })),
+                  this.draw()
+                );
+              if (
+                ("string" == typeof e && (e = new Date(Date.parse(e))), F(e))
+              ) {
+                var n = this._o.minDate,
+                  a = this._o.maxDate;
+                F(n) && e < n ? (e = n) : F(a) && a < e && (e = a),
+                  (this._d = new Date(e.getTime())),
+                  P(this._d),
+                  this.gotoDate(this._d),
+                  this._o.field &&
+                    ((this._o.field.value = this.toString()),
+                    i(this._o.field, "change", { firedBy: this })),
+                  t ||
+                    "function" != typeof this._o.onSelect ||
+                    this._o.onSelect.call(this, this.getDate());
+              }
+            },
+            gotoDate: function (e) {
+              var t = !0;
+              if (F(e)) {
+                if (this.calendars) {
+                  var n = new Date(
+                      this.calendars[0].year,
+                      this.calendars[0].month,
+                      1
+                    ),
+                    a = new Date(
+                      this.calendars[this.calendars.length - 1].year,
+                      this.calendars[this.calendars.length - 1].month,
+                      1
+                    ),
+                    i = e.getTime();
+                  a.setMonth(a.getMonth() + 1),
+                    a.setDate(a.getDate() - 1),
+                    (t = i < n.getTime() || a.getTime() < i);
+                }
+                t &&
+                  ((this.calendars = [
+                    { month: e.getMonth(), year: e.getFullYear() },
+                  ]),
+                  "right" === this._o.mainCalendar &&
+                    (this.calendars[0].month += 1 - this._o.numberOfMonths)),
+                  this.adjustCalendars();
+              }
+            },
+            adjustDate: function (e, t) {
+              var n,
+                a = this.getDate() || new Date(),
+                i = 24 * parseInt(t) * 60 * 60 * 1e3;
+              "add" === e
+                ? (n = new Date(a.valueOf() + i))
+                : "subtract" === e && (n = new Date(a.valueOf() - i)),
+                this.setDate(n);
+            },
+            adjustCalendars: function () {
+              this.calendars[0] = a(this.calendars[0]);
+              for (var e = 1; e < this._o.numberOfMonths; e++)
+                this.calendars[e] = a({
+                  month: this.calendars[0].month + e,
+                  year: this.calendars[0].year,
+                });
+              this.draw();
+            },
+            gotoToday: function () {
+              this.gotoDate(new Date());
+            },
+            gotoMonth: function (e) {
+              isNaN(e) ||
+                ((this.calendars[0].month = parseInt(e, 10)),
+                this.adjustCalendars());
+            },
+            nextMonth: function () {
+              this.calendars[0].month++, this.adjustCalendars();
+            },
+            prevMonth: function () {
+              this.calendars[0].month--, this.adjustCalendars();
+            },
+            gotoYear: function (e) {
+              isNaN(e) ||
+                ((this.calendars[0].year = parseInt(e, 10)),
+                this.adjustCalendars());
+            },
+            setMinDate: function (e) {
+              e instanceof Date
+                ? (P(e),
+                  (this._o.minDate = e),
+                  (this._o.minYear = e.getFullYear()),
+                  (this._o.minMonth = e.getMonth()))
+                : ((this._o.minDate = u.minDate),
+                  (this._o.minYear = u.minYear),
+                  (this._o.minMonth = u.minMonth),
+                  (this._o.startRange = u.startRange)),
+                this.draw();
+            },
+            setMaxDate: function (e) {
+              e instanceof Date
+                ? (P(e),
+                  (this._o.maxDate = e),
+                  (this._o.maxYear = e.getFullYear()),
+                  (this._o.maxMonth = e.getMonth()))
+                : ((this._o.maxDate = u.maxDate),
+                  (this._o.maxYear = u.maxYear),
+                  (this._o.maxMonth = u.maxMonth),
+                  (this._o.endRange = u.endRange)),
+                this.draw();
+            },
+            setStartRange: function (e) {
+              this._o.startRange = e;
+            },
+            setEndRange: function (e) {
+              this._o.endRange = e;
+            },
+            draw: function (e) {
+              if (this._v || e) {
+                var t,
+                  n = this._o,
+                  a = n.minYear,
+                  i = n.maxYear,
+                  s = n.minMonth,
+                  o = n.maxMonth,
+                  r = "";
+                this._y <= a &&
+                  ((this._y = a), !isNaN(s) && this._m < s && (this._m = s)),
+                  this._y >= i &&
+                    ((this._y = i), !isNaN(o) && this._m > o && (this._m = o)),
+                  (t =
+                    "pika-title-" +
+                    Math.random()
+                      .toString(36)
+                      .replace(/[^a-z]+/g, "")
+                      .substr(0, 2));
+                for (var l = 0; l < n.numberOfMonths; l++)
+                  r +=
+                    '<div class="pika-lendar">' +
+                    p(
+                      this,
+                      l,
+                      this.calendars[l].year,
+                      this.calendars[l].month,
+                      this.calendars[0].year,
+                      t
+                    ) +
+                    this.render(
+                      this.calendars[l].year,
+                      this.calendars[l].month,
+                      t
+                    ) +
+                    "</div>";
+                (this.el.innerHTML = r),
+                  n.bound &&
+                    "hidden" !== n.field.type &&
+                    h(function () {
+                      n.trigger.focus();
+                    }, 1),
+                  "function" == typeof this._o.onDraw && this._o.onDraw(this),
+                  n.bound && n.field.setAttribute("aria-label", n.ariaLabel);
+              }
+            },
+            adjustPosition: function () {
+              var e, t, n, a, i, s, o, r, l, h, d, u;
+              if (!this._o.container) {
+                if (
+                  ((this.el.style.position = "absolute"),
+                  (t = e = this._o.trigger),
+                  (n = this.el.offsetWidth),
+                  (a = this.el.offsetHeight),
+                  (i = window.innerWidth || c.documentElement.clientWidth),
+                  (s = window.innerHeight || c.documentElement.clientHeight),
+                  (o =
+                    window.pageYOffset ||
+                    c.body.scrollTop ||
+                    c.documentElement.scrollTop),
+                  (u = d = !0),
+                  "function" == typeof e.getBoundingClientRect)
+                )
+                  (r =
+                    (h = e.getBoundingClientRect()).left + window.pageXOffset),
+                    (l = h.bottom + window.pageYOffset);
+                else
+                  for (
+                    r = t.offsetLeft, l = t.offsetTop + t.offsetHeight;
+                    (t = t.offsetParent);
+
+                  )
+                    (r += t.offsetLeft), (l += t.offsetTop);
+                ((this._o.reposition && i < r + n) ||
+                  (-1 < this._o.position.indexOf("right") &&
+                    0 < r - n + e.offsetWidth)) &&
+                  ((r = r - n + e.offsetWidth), (d = !1)),
+                  ((this._o.reposition && s + o < l + a) ||
+                    (-1 < this._o.position.indexOf("top") &&
+                      0 < l - a - e.offsetHeight)) &&
+                    ((l = l - a - e.offsetHeight), (u = !1)),
+                  (this.el.style.left = r + "px"),
+                  (this.el.style.top = l + "px"),
+                  f(this.el, d ? "left-aligned" : "right-aligned"),
+                  f(this.el, u ? "bottom-aligned" : "top-aligned"),
+                  g(this.el, d ? "right-aligned" : "left-aligned"),
+                  g(this.el, u ? "top-aligned" : "bottom-aligned");
+              }
+            },
+            render: function (e, t, n) {
+              var a = this._o,
+                i = new Date(),
+                s = L(e, t),
+                o = new Date(e, t, 1).getDay(),
+                r = [],
+                l = [];
+              P(i), 0 < a.firstDay && (o -= a.firstDay) < 0 && (o += 7);
+              for (
+                var h = 0 === t ? 11 : t - 1,
+                  d = 11 === t ? 0 : t + 1,
+                  u = 0 === t ? e - 1 : e,
+                  c = 11 === t ? e + 1 : e,
+                  f = L(u, h),
+                  g = s + o,
+                  m = g;
+                7 < m;
+
+              )
+                m -= 7;
+              g += 7 - m;
+              for (var p, y, D, v, b, _, w, M = !1, k = 0, x = 0; k < g; k++) {
+                var R = new Date(e, t, k - o + 1),
+                  N = !!F(this._d) && B(R, this._d),
+                  S = B(R, i),
+                  C = -1 !== a.events.indexOf(R.toDateString()),
+                  I = k < o || s + o <= k,
+                  T = k - o + 1,
+                  E = t,
+                  Y = e,
+                  O = a.startRange && B(a.startRange, R),
+                  j = a.endRange && B(a.endRange, R),
+                  W =
+                    a.startRange &&
+                    a.endRange &&
+                    a.startRange < R &&
+                    R < a.endRange;
+                I &&
+                  (k < o
+                    ? ((T = f + T), (E = h), (Y = u))
+                    : ((T -= s), (E = d), (Y = c)));
+                var A = {
+                  day: T,
+                  month: E,
+                  year: Y,
+                  hasEvent: C,
+                  isSelected: N,
+                  isToday: S,
+                  isDisabled:
+                    (a.minDate && R < a.minDate) ||
+                    (a.maxDate && R > a.maxDate) ||
+                    (a.disableWeekends &&
+                      (void 0, 0 === (w = R.getDay()) || 6 === w)) ||
+                    (a.disableDayFn && a.disableDayFn(R)),
+                  isEmpty: I,
+                  isStartRange: O,
+                  isEndRange: j,
+                  isInRange: W,
+                  showDaysInNextAndPreviousMonths:
+                    a.showDaysInNextAndPreviousMonths,
+                  enableSelectionDaysInNextAndPreviousMonths:
+                    a.enableSelectionDaysInNextAndPreviousMonths,
+                };
+                a.pickWholeWeek && N && (M = !0),
+                  l.push(H(A)),
+                  7 == ++x &&
+                    (a.showWeekNumber &&
+                      l.unshift(
+                        ((D = k - o),
+                        (v = t),
+                        (b = e),
+                        (_ = void 0),
+                        (_ = new Date(b, 0, 1)),
+                        '<td class="pika-week">' +
+                          Math.ceil(
+                            ((new Date(b, v, D) - _) / 864e5 + _.getDay() + 1) /
+                              7
+                          ) +
+                          "</td>")
+                      ),
+                    r.push(
+                      ((p = l),
+                      (y = a.isRTL),
+                      '<tr class="pika-row' +
+                        (a.pickWholeWeek ? " pick-whole-week" : "") +
+                        (M ? " is-selected" : "") +
+                        '">' +
+                        (y ? p.reverse() : p).join("") +
+                        "</tr>")
+                    ),
+                    (x = 0),
+                    (M = !(l = [])));
+              }
+              return V(a, r, n);
+            },
+            isVisible: function () {
+              return this._v;
+            },
+            show: function () {
+              this.isVisible() ||
+                ((this._v = !0),
+                this.draw(),
+                g(this.el, "is-hidden"),
+                this._o.bound &&
+                  (r(c, "click", this._onClick), this.adjustPosition()),
+                "function" == typeof this._o.onOpen &&
+                  this._o.onOpen.call(this));
+            },
+            hide: function () {
+              var e = this._v;
+              !1 !== e &&
+                (this._o.bound && t(c, "click", this._onClick),
+                (this.el.style.position = "static"),
+                (this.el.style.left = "auto"),
+                (this.el.style.top = "auto"),
+                f(this.el, "is-hidden"),
+                (this._v = !1),
+                void 0 !== e &&
+                  "function" == typeof this._o.onClose &&
+                  this._o.onClose.call(this));
+            },
+            destroy: function () {
+              var e = this._o;
+              this.hide(),
+                t(this.el, "mousedown", this._onMouseDown, !0),
+                t(this.el, "touchend", this._onMouseDown, !0),
+                t(this.el, "change", this._onChange),
+                e.keyboardInput && t(c, "keydown", this._onKeyChange),
+                e.field &&
+                  (t(e.field, "change", this._onInputChange),
+                  e.bound &&
+                    (t(e.trigger, "click", this._onInputClick),
+                    t(e.trigger, "focus", this._onInputFocus),
+                    t(e.trigger, "blur", this._onInputBlur))),
+                this.el.parentNode && this.el.parentNode.removeChild(this.el);
+            },
+          }),
+          e
+        );
+      });
+    </script>
+    <script>
+      var picker = new Pikaday({
+        field: document.getElementById("fecha-expedicion"),
+        format: "DD/MM/YYYY", // Cambia el formato si es necesario
+        i18n: {
+          previousMonth: "Mes Anterior",
+          nextMonth: "Mes Siguiente",
+          months: [
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+          ],
+          weekdays: [
+            "Domingo",
+            "Lunes",
+            "Martes",
+            "Miércoles",
+            "Jueves",
+            "Viernes",
+            "Sábado",
+          ],
+          weekdaysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+        },
+        onSelect: function (date) {
+          // Opcional: Puedes hacer algo cuando se seleccione una fecha
+          console.log(date.toISOString());
+        },
+        // Configura el calendario para que se abra siempre hacia abajo
+        reposition: false,
+      });
+    </script>
+    <!--     <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Obtén una referencia al formulario y al botón
+        var form = document.querySelector("form");
+        var submitBtn = document.querySelector(".submit-btn");
+
+        // Función para verificar la validez del formulario
+        function checkFormValidity() {
+          if (form.checkValidity()) {
+            submitBtn.disabled = false; // Habilita el botón si el formulario es válido
+          } else {
+            submitBtn.disabled = true; // Deshabilita el botón si el formulario no es válido
+          }
+        }
+
+        // Añade eventos a los campos del formulario para verificar la validez
+        form.addEventListener("input", checkFormValidity);
+        form.addEventListener("change", checkFormValidity);
+        form.addEventListener("submit", function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault(); // Previene el envío si el formulario no es válido
+          }
+        });
+
+        // Inicializa la validez del formulario al cargar
+        checkFormValidity();
+      });
+    </script> -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var input = document.getElementById("numero-documento");
+
+        input.addEventListener("input", function () {
+          // Elimina cualquier carácter que no sea un dígito
+          this.value = this.value.replace(/\D/g, "");
+        });
+      });
+
+      document
+        .getElementById("continue-btn")
+        .addEventListener("click", function () {
+          window.location.href = "../login/login-4.html";
+        });
+    </script>
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navSection = document.getElementById("nav-section");
+
+      hamburger.addEventListener("click", function () {
+        navSection.classList.toggle("active");
+        hamburger.classList.toggle("active"); // Cambia la hamburguesa a "X"
+      });
+    </script>
+  </body>
+</html>
